@@ -1,0 +1,8 @@
+ users:
+ - email:string
+ - password:string
+ - name:string
+ - createddate:datetime
+ - createdby:string
+ - updateddate:datetime
+ - updatedby:string

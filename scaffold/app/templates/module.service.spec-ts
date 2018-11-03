@@ -1,0 +1,15 @@
+import {{ TestBed, inject }} from '@angular/core/testing';
+
+import {{ {Resources}Service }} from './{resources}.service';
+
+describe('{Resources}Service', () => {{
+  beforeEach(() => {{
+    TestBed.configureTestingModule({{
+      providers: [{Resources}Service]
+    }});
+  }});
+
+  it('should be created', inject([{Resources}Service], (service: {Resources}Service) => {{
+    expect(service).toBeTruthy();
+  }}));
+}});

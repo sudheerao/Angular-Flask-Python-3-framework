@@ -1,0 +1,40 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'{Resources}'" [icon]="'fa-table'"></app-page-header>
+    <div class="row">
+        <div class="col col-xl-12 col-lg-12">
+            <div class="card mb-3">
+                
+                <div class="card-body table-responsive">
+                    <table class="table table-hover" cellspacing="0">
+                        <thead class="thead-inverse">
+                        <tr>
+                            <th>ID</th>
+                            {table_headers}
+
+                      </tr>
+
+
+                        </thead>
+
+
+                        
+                            <tbody>
+                              <tr *ngFor="let {resource} of {resources}">
+                                <td>{{{{ {resource}.id
+                                }}}}</td>
+
+                                {table_body}
+
+                                
+                              </tr>
+                            </tbody>
+                         
+                        
+                    
+                </table>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</div>
