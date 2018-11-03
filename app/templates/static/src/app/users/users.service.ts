@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { catchError} from 'rxjs/operators';
+import { User } from '../users/user';
+
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +29,19 @@ export class UsersService {
       )
     
   }
+
+  add(user: any): Observable<any> {
+
+    
+    return this.http.post<User>(`/api/v1/signup.json`, user)
+      .pipe(
+        catchError(UsersService._handleError)          
+        
+        )
+    
+
+  
+}
 }
 
 
