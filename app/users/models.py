@@ -16,14 +16,13 @@ class Users(db.Model, CRUD_MixIn):
     updateddate = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updatedby = db.Column(db.String(250), nullable=False)
 
-    def __init__(self,  email,  password,  name,  createddate,  createdby,  updateddate,  updatedby, ):
+    def __init__(self,  email,  password,  name,   createdby,   updatedby, ):
 
         self.email = email
         self.password = password
         self.name = name
-        self.createddate = createddate
         self.createdby = createdby
-        self.updateddate = updateddate
+       
         self.updatedby = updatedby
 
 
@@ -34,11 +33,11 @@ class UsersSchema(Schema):
     id = fields.Integer(dump_only=True)
 
     email = fields.String(validate=not_blank)
-    password = fields.String(validate=not_blank)
+    password = fields.String(validate=not_blank, load_only=True)
     name = fields.String(validate=not_blank)
-    createddate = fields.Date(required=True)
+    createddate = fields.Date(dump_only=True)
     createdby = fields.String(validate=not_blank)
-    updateddate = fields.Date(required=True)
+    updateddate = fields.Date(dump_only=True)
     updatedby = fields.String(validate=not_blank)
 
     # self links

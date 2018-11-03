@@ -25,18 +25,19 @@ class CreateListUsers(Resource):
         users_query = Users.query.all()
         results = schema.dump(users_query, many=True).data
         return results
-
+    #check baseviews signup
     """http://jsonapi.org/format/#crud
     A resource can be created by sending a POST request to a URL that represents a collection of users. The request MUST include a single resource object as primary data. The resource object MUST contain at least a type member.
-    If a POST request did not include a Client-Generated ID and the requested resource has been created successfully, the server MUST return a 201 Created status code"""
-
+    If a POST request did not include a Client-Generated ID and the requested resource has been created successfully, the server MUST return a 201 Created status code
+    
     def post(self):
         raw_dict = request.get_json(force=True)
         try:
             schema.validate(raw_dict)
             request_dict = raw_dict['data']['attributes']
-            user = Users(request_dict['email'], request_dict['password'], request_dict['name'], request_dict[
-                         'createddate'], request_dict['createdby'], request_dict['updateddate'], request_dict['updatedby'],)
+            user = Users(request_dict['email'], request_dict['password'], request_dict['name'],
+                          request_dict['createdby'],
+                           request_dict['updatedby'])
             user.add(user)
             # Should not return password hash
             query = Users.query.get(user.id)
@@ -53,6 +54,7 @@ class CreateListUsers(Resource):
             resp = jsonify({"error": str(e)})
             resp.status_code = 403
             return resp
+    """      
 
 
 class GetUpdateDeleteUser(Resource):

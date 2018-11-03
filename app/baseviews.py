@@ -133,29 +133,21 @@ class SignUp(Resource):
 
     def post(self):
         raw_dict = request.get_json(force=True)
-        print(raw_dict)
+      
         try:
             schema.validate(raw_dict)
             request_dict = raw_dict['data']['attributes']
-            status = 1
-            profileid = 1
-            createdby = 4
-            phone = "2"
-            id = "6"
-            user = Users(request_dict['username'],
-                         request_dict['password'],
-                         request_dict['firstname'],
-                         request_dict['lastname'],
+            createdby = request_dict['name']
+            updatedby = request_dict['name']
+            password = generate_password_hash (request_dict['password'] )
+
+           
+            user = Users(
                          request_dict['email'],
-                         request_dict['address'],
-                         phone,
-                         profileid,
-                         status,
+                         password,
+                         request_dict['name'],
                          createdby,
-                         id
-
-
-
+                         updatedby ,
 
                          )
             user.add(user)
