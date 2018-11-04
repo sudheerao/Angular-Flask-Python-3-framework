@@ -82,4 +82,4 @@ pip-selfcheck.json
 !.elasticbeanstalk/*.global.yml
 
 #node modules
-**/**/**/node_modules/*
+/**/**/**/node_modules/*
