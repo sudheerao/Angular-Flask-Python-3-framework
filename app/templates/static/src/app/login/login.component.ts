@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { routerTransition } from '../router.animations';
-import { User } from '../users/user';
 import { Subscription } from 'rxjs';
 import { UsersService } from '../users/users.service';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -29,8 +28,7 @@ export class LoginComponent  {
     
     onLoggedin() {
 
-        console.log(this.LoginForm.value)
-        console.log(this.LoginForm.value.email)
+        
 
         this.obj = {
             "data": {
@@ -42,6 +40,24 @@ export class LoginComponent  {
                 
               }
             }
+
+        this.LoginSubs = this.usersApi
+            
+            .login(this.obj)
+            .subscribe(res => {
+               console.log( res.token);
+      
+               //this.router.navigate(['/users']);
+      
+      
+              
+              },
+              console.error
+              
+              
+            );
+      
+
 
 
         localStorage.setItem('isLoggedin', 'true');

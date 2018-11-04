@@ -28,7 +28,6 @@ def create_token(user):
         'sub': user.id,
         'iat': datetime.utcnow(),
         'exp': datetime.utcnow() + timedelta(days=1),
-        'scope': user.role
     }
     token = jwt.encode(payload, SECRET_KEY)
     return token.decode('unicode_escape')
