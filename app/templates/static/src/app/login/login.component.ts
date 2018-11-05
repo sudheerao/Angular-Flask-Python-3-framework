@@ -4,6 +4,7 @@ import { routerTransition } from '../router.animations';
 import { Subscription } from 'rxjs';
 import { UsersService } from '../users/users.service';
 import { FormGroup, FormControl } from '@angular/forms';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 
 
@@ -21,6 +22,7 @@ export class LoginComponent  {
         email: new FormControl(''),
         password: new FormControl(''),
       });
+    token : any;
 
     constructor(private usersApi: UsersService, private router: Router, ) { 
              }
@@ -41,24 +43,30 @@ export class LoginComponent  {
               }
             }
 
+           
+
         this.LoginSubs = this.usersApi
             
             .login(this.obj)
             .subscribe(res => {
                console.log( res.token);
+               localStorage.setItem('token', res.token);
+
       
-               //this.router.navigate(['/users']);
+               this.router.navigate(['/dashboard']);
       
       
               
-              },
-              console.error
+              }
+
+              
               
               
             );
-      
+        
 
-
+        
+        //this.LoginSubs.unsubscribe();
 
         localStorage.setItem('isLoggedin', 'true');
     }
