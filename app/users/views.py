@@ -5,6 +5,8 @@ from app.baseviews import Resource
 from app.basemodels import db
 from sqlalchemy.exc import SQLAlchemyError
 from marshmallow import ValidationError
+from werkzeug.security import check_password_hash, generate_password_hash
+
 
 users = Blueprint('users', __name__)
 # http://marshmallow.readthedocs.org/en/latest/quickstart.html#declaring-schemas
@@ -78,6 +80,8 @@ class GetUpdateDeleteUser(Resource):
             schema.validate(raw_dict)
             request_dict = raw_dict['data']['attributes']
             for key, value in request_dict.items():
+                if key == "password":
+                    value = generate_password_hash(value)
                 setattr(user, key, value)
 
             user.update()

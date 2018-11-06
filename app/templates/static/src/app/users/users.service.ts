@@ -71,19 +71,33 @@ getUser(id:number): Observable<any> {
 }
 
 
-edit(user: any, id:number): Observable<any> {
+  edit(user: any, id:number): Observable<any> {
 
-  
-    
-  return this.http.post<User>(`/api/v1/users/id.json`, user)
-    .pipe(
-      catchError(UsersService._handleError)          
+    let url = '/api/v1/users/' +id + '.json';
       
-      )
-  
+    return this.http.patch<User>(url, user)
+      .pipe(
+        catchError(UsersService._handleError)          
+        
+        )
+    
 
 
-}
+  }
+
+    delete( id:number): Observable<any> {
+
+      let url = '/api/v1/users/' +id + '.json';
+        
+      return this.http.delete<User>(url)
+        .pipe(
+          catchError(UsersService._handleError)          
+          
+          )
+      
+
+
+    }
 }
 
 

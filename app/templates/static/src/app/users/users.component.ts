@@ -6,6 +6,8 @@ import { UsersService } from './users.service';
 import * as $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-bs4';
+import {Router} from "@angular/router";
+
 
 
 @Component({
@@ -24,7 +26,7 @@ export class UsersComponent implements OnInit {
   // Our future instance of DataTable
   dataTable: any;
 
-  constructor(private usersApi: UsersService, private chRef: ChangeDetectorRef) {  }
+  constructor(private usersApi: UsersService, private chRef: ChangeDetectorRef,  private router: Router) {  }
 
  
 
@@ -47,6 +49,24 @@ export class UsersComponent implements OnInit {
       );
     
   }
+
+
+
+  deleteUser(id : number )  {
+
+    this.usersApi
+
+         .delete(id)
+         .subscribe(res => {
+            
+          location.reload();
+          //this.router.navigate(['/users']);
+
+              },
+          console.error
+                    );
+            
+            }
 
   ngOnDestroy() {
     this.usersListSubs.unsubscribe();

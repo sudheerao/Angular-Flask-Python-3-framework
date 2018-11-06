@@ -27,11 +27,15 @@ def create_app(config_filename):
     @app.route('/<path:filename>')
     def file(filename):
         return send_from_directory(os.path.join(app.root_path, 'templates/static/dist'), filename)
-
+    
+    @app.route('/users')
     @app.route('/')
     @app.route('/login')
     def index():
         return render_template('static/dist/index.html')
+
+    
+
 
     # Auth API
     app.register_blueprint(login1, url_prefix='/api/v1/')

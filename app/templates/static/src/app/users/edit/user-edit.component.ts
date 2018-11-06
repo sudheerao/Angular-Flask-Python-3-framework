@@ -50,12 +50,67 @@ export class UserEditComponent implements OnInit  {
         }
 
         onSubmit() {
-          console.log("done")
+
+          let user = {};
+
+        if (this.UserEditForm.value.password) {
+          
+           user = {
+
+              "data": {
+                "type": "users",
+                "attributes": {
+                  "email" : this.UserEditForm.value.email,
+                  "password" : this.UserEditForm.value.password,
+                  "name" : this.UserEditForm.value.name,
+              }
+                  
+                }
+              
+          }
+
+        }
+        else {
+
+           
+           user = {
+
+            "data": {
+              "type": "users",
+              "attributes": {
+                "email" : this.UserEditForm.value.email,
+                "name" : this.UserEditForm.value.name,
+            }
+                
+              }
+            
+        }
+
+        }
+
+
+          this.usersApi
+   
+               .edit(user, this.id)
+               .subscribe(res => {
+                  
+                this.router.navigate(['/users']);
+
+                    },
+       console.error
+                 );
         
         }
 
 
-  }
+       
+
+
+
+        }
+
+
+
 
 
   
