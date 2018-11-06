@@ -23,6 +23,14 @@
                   <div class="form-group">
                         <input type="password" class="form-control input-underline input-lg" id="password" 
                                     required    formControlName = "password"   placeholder="password">
+
+                                    <div *ngIf="password.invalid"
+                                    class="alert alert-danger">
+                      
+                                  <div *ngIf="password.errors.minlength">
+                                    Name must be at least 8 characters long.
+                                  </div>
+                                  </div>
                       </div>  
 
 

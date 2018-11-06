@@ -3,7 +3,7 @@ import { routerTransition } from '../../router.animations';
 import { Subscription } from 'rxjs';
 import { UsersService } from '../users.service';
 import {Router} from "@angular/router";
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 
@@ -24,7 +24,11 @@ export class UserAddComponent  {
 
     UserAddForm = new FormGroup({
       email: new FormControl(''),
-      password: new FormControl(''),
+      password: new FormControl('', [
+      
+        Validators.minLength(8)
+        
+      ]),
       name: new FormControl(''),
     });
     
