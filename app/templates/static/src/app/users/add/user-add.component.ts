@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { Subscription } from 'rxjs';
 import { UsersService } from '../users.service';
@@ -17,21 +17,39 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 
-export class UserAddComponent  {
+export class UserAddComponent implements OnInit {
    
     userAddSubs: Subscription;
     obj :any;
 
-    UserAddForm = new FormGroup({
-      email: new FormControl(''),
-      password: new FormControl('', [
+    UserAddForm:FormGroup;
+
+    ngOnInit ()   {
       
-        Validators.minLength(8)
+      this.UserAddForm = new FormGroup(
+    
+      {
+      email: new FormControl(''),
+      
+      name: new FormControl('',[
+        Validators.required,
+        
         
       ]),
-      name: new FormControl(''),
-    });
-    
+
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+        
+        
+      ]),
+    },{updateOn: 'blur'} );
+
+  }
+
+  get name() { return this.UserAddForm.get('name'); }
+  get password() { return this.UserAddForm.get('password'); }
+
 
     constructor(private usersApi: UsersService, private router: Router) { 
              }
