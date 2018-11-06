@@ -55,6 +55,35 @@ login(user: any): Observable<any> {
 
 
 }
+
+getUser(id:number): Observable<any> {
+
+  let url = '/api/v1/users/' +id + '.json';
+
+  return this.http.get<User>(url)
+    .pipe(
+      catchError(UsersService._handleError)          
+      
+      )
+  
+
+
+}
+
+
+edit(user: any, id:number): Observable<any> {
+
+  
+    
+  return this.http.post<User>(`/api/v1/users/id.json`, user)
+    .pipe(
+      catchError(UsersService._handleError)          
+      
+      )
+  
+
+
+}
 }
 
 

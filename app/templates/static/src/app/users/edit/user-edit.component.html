@@ -2,8 +2,8 @@
 
     <div class="row justify-content-md-center">
         <div class="col-md-4">
-            <h1>Add User</h1>
-            <form role="form" [formGroup]="UserAddForm"  (ngSubmit)="onSubmit()" >
+            <h2> Edit User</h2>
+            <form role="form" [formGroup]="UserEditForm"  (ngSubmit)="onSubmit()" >
                 <div class="form-content">
 
 
@@ -32,7 +32,7 @@
                     
                     
                 </div>
-                <button type="submit" [disabled]="!UserAddForm.valid" class="btn btn-success" >Add</button>
+                <button type="submit" [disabled]="!UserEditForm.valid" class="btn btn-success" >Add</button>
                 
             </form>
         </div>

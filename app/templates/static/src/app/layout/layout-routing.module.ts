@@ -20,6 +20,7 @@ const routes: Routes = [
                 // route
             { path: 'users', loadChildren: '../users/users.module#UsersModule' },
              { path: 'user-add', loadChildren: '../users/add/user-add.module#UserAddModule' },
+             { path: 'users/:id', loadChildren: '../users/edit/user-edit.module#UserEditModule' },
                 
         ]
     }

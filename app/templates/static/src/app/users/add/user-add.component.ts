@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { routerTransition } from '../../router.animations';
-import { User } from '../user';
 import { Subscription } from 'rxjs';
 import { UsersService } from '../users.service';
 import {Router} from "@angular/router";
+import { FormGroup, FormControl } from '@angular/forms';
+
 
 
 
@@ -20,23 +21,31 @@ export class UserAddComponent  {
    
     userAddSubs: Subscription;
     obj :any;
+
+    UserAddForm = new FormGroup({
+      email: new FormControl(''),
+      password: new FormControl(''),
+      name: new FormControl(''),
+    });
     
 
     constructor(private usersApi: UsersService, private router: Router) { 
              }
  
-  user = new User('', '', '',);
  
-  submitted = false;
   
  
-  onSubmit() { this.submitted = true;
-
+  onSubmit() { 
+     
  
     this.obj = {
         "data": {
           "type": "users",
-          "attributes": this.user,
+          "attributes": {
+            "email" : this.UserAddForm.value.email,
+            "password" : this.UserAddForm.value.password,
+            "name" : this.UserAddForm.value.name,
+        }
             
           }
         }
@@ -47,11 +56,16 @@ export class UserAddComponent  {
       .subscribe(res => {
          // console.log( res.data);
 
+         
+
+        
+
          this.router.navigate(['/users']);
 
 
         
         },
+      
         console.error
         
         
@@ -60,9 +74,7 @@ export class UserAddComponent  {
      
 }
  
-  newUser() {
-    this.user = new User('', '', '');
-  }
+ 
 
 }
 

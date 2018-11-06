@@ -19,6 +19,8 @@
                          <th>Createdby</th>
                          <th>Updateddate</th>
                          <th>Updatedby</th>
+                         <th>Edit</th>
+                         <th>Delete</th>
 
                       </tr>
 
@@ -39,6 +41,11 @@
                          <td>{{ user.attributes.createdby }}</td>
                          <td>{{ user.attributes.updateddate }}</td>
                          <td>{{ user.attributes.updatedby }}</td>
+                         <td><a [routerLink]= "['/users',  user.id ]" class="btn btn-default btn-warning" 
+                            role="button"  id="editButton"><i class="fa fa-edit"></i></a></td>
+                        <td> <button class="btn btn-default btn-danger" (click)="deleteUser(user.id)" 
+                        id="deleteButton"><i class="fa fa-trash-o"></i></button> </td>
+
 
                                 
                               </tr>
