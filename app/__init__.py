@@ -19,11 +19,6 @@ def create_app(config_filename):
     # Init Flask-Mail
     mail.init_app(app)
 
-    """ @app.route('/login')
-    def login():
-        return render_template('login.html')
-    """
-
     @app.route('/<path:filename>')
     def file(filename):
         return send_from_directory(os.path.join(app.root_path, 'templates/static/dist'), filename)
