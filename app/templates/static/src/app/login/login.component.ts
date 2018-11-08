@@ -49,8 +49,8 @@ export class LoginComponent  {
             
             .login(this.obj)
             .subscribe(res => {
-               console.log( res.token);
-               localStorage.setItem('token', res.token);
+               //console.log( res.token);
+               localStorage.setItem('id_token', res.token);
 
       
                this.router.navigate(['/dashboard']);
@@ -68,6 +68,6 @@ export class LoginComponent  {
         
         //this.LoginSubs.unsubscribe();
 
-        localStorage.setItem('isLoggedin', 'true');
+        //localStorage.setItem('isLoggedin', 'true');
     }
 }
