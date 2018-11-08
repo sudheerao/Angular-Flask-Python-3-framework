@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { UsersService } from '../users.service';
 import {Router, ActivatedRoute} from "@angular/router";
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 @Component({
@@ -13,10 +13,27 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class UserEditComponent implements OnInit  {
 
    UserEditForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl(''),
-    name: new FormControl(''),
+    email: new FormControl('', [
+      Validators.required,
+      
+      
+          ]),
+      
+      name: new FormControl('',[
+        Validators.required,
+        
+        
+      ]),
+
+      password: new FormControl('', [
+        Validators.minLength(8),
+        
+        
+      ]),
   });
+
+
+  
 
    id:number  =  parseInt(this.route.snapshot.paramMap.get('id'));
   
@@ -48,6 +65,10 @@ export class UserEditComponent implements OnInit  {
 
 
         }
+
+        get name() { return this.UserEditForm.get('name'); }
+        get email() { return this.UserEditForm.get('email'); }
+        get password() { return this.UserEditForm.get('password'); }
 
         onSubmit() {
 

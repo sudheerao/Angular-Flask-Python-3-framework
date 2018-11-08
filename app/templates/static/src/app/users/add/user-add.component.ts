@@ -29,7 +29,11 @@ export class UserAddComponent implements OnInit {
       this.UserAddForm = new FormGroup(
     
       {
-      email: new FormControl(''),
+      email: new FormControl('', [
+      Validators.required,
+      
+      
+          ]),
       
       name: new FormControl('',[
         Validators.required,
@@ -48,6 +52,8 @@ export class UserAddComponent implements OnInit {
   }
 
   get name() { return this.UserAddForm.get('name'); }
+  get email() { return this.UserAddForm.get('email'); }
+
   get password() { return this.UserAddForm.get('password'); }
 
 
