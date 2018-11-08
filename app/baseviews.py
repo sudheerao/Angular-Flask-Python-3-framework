@@ -34,8 +34,7 @@ def create_token(user):
 
 
 def parse_token(req):
-
-    token = req.headers.get('Authorization').split()[1]
+    token = req.headers.get('Authorization')
     return jwt.decode(token, SECRET_KEY, algorithms='HS256')
 
 # Login decorator function
@@ -229,5 +228,5 @@ api.add_resource(ForgotPassword, 'forgotpassword')
 
 
 class Resource(flask_restful.Resource):
-    #method_decorators = [login_required]
+    method_decorators = [login_required]
     pass
