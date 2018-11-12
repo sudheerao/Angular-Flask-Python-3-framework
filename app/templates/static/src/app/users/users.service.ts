@@ -56,7 +56,7 @@ export class UsersService {
 login(user: any): Observable<any> {
 
     
-  return this.http.post<User>(`/api/v1/login.json`, user, this.httpOptions)
+  return this.http.post<User>(`/api/v1/login.json`, user)
     .pipe(
       catchError(UsersService._handleError)          
       
