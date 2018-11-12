@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import { catchError} from 'rxjs/operators';
 import { User } from '../users/user';
 
@@ -19,10 +19,18 @@ export class UsersService {
     })
   }
 
-  private static _handleError(err: HttpErrorResponse | any) {
-    return Observable.throw(err.message || 'Error: Unable to complete request.');
-  }
-
+  private handleError(error: HttpErrorResponse) {
+    
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      return throwError(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
+    
+    // return an observable with a user-facing error message
+   // return throwError( 
+    //  'Something bad happened; please try again later.');
+  };
   constructor(private http: HttpClient) { }
 
 
@@ -35,7 +43,7 @@ export class UsersService {
       .pipe(
         
         
-        catchError(UsersService._handleError)
+        catchError(this.handleError)
       )
     
   }
@@ -45,7 +53,7 @@ export class UsersService {
     
     return this.http.post<User>(`/api/v1/signup.json`, user, this.httpOptions)
       .pipe(
-        catchError(UsersService._handleError)          
+        catchError(this.handleError)          
         
         )
     
@@ -58,7 +66,7 @@ login(user: any): Observable<any> {
     
   return this.http.post<User>(`/api/v1/login.json`, user)
     .pipe(
-      catchError(UsersService._handleError)          
+      catchError(this.handleError)          
       
       )
   
@@ -72,7 +80,7 @@ getUser(id:number): Observable<any> {
 
   return this.http.get<User>(url, this.httpOptions)
     .pipe(
-      catchError(UsersService._handleError)          
+      catchError(this.handleError)          
       
       )
   
@@ -87,7 +95,7 @@ getUser(id:number): Observable<any> {
       
     return this.http.patch<User>(url, user, this.httpOptions)
       .pipe(
-        catchError(UsersService._handleError)          
+        catchError(this.handleError)          
         
         )
     
@@ -101,7 +109,7 @@ getUser(id:number): Observable<any> {
         
       return this.http.delete<User>(url, this.httpOptions)
         .pipe(
-          catchError(UsersService._handleError)          
+          catchError(this.handleError)          
           
           )
       

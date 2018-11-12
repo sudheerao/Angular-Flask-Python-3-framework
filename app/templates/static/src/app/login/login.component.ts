@@ -23,8 +23,13 @@ export class LoginComponent  {
         password: new FormControl(''),
       });
     token : any;
+     http_errors :boolean = false;
+     error_message:any;
 
-    constructor(private usersApi: UsersService, private router: Router, ) { 
+
+
+    constructor(private usersApi: UsersService, private router: Router, 
+         ) { 
              }
     
     
@@ -57,9 +62,15 @@ export class LoginComponent  {
       
       
               
-              }
+              },
 
-              
+              error => {
+                this.http_errors = true;
+
+                  this.error_message = error // error path
+
+
+              }
               
               
             );
