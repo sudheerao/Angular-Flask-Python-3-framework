@@ -3,8 +3,8 @@ dist: trusty
 
 language: python
 python:
-   - "3.4"
-   - "3.5"
+   - "3.6"
+   
 
 # command to run tests
 script:
@@ -14,7 +14,6 @@ script:
 
 addons:
   postgresql: "9.3"
-  mariadb: '10.0'
 
 before_script:
   - psql -c 'create database fscafold;' -U postgres
