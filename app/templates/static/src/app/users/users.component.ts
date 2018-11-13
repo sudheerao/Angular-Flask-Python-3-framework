@@ -23,8 +23,9 @@ export class UsersComponent implements OnInit {
   authenticated = false;
  
   users: any[];
-  // Our future instance of DataTable
   dataTable: any;
+  http_errors :boolean = false;
+  error_message:any;
 
   constructor(private usersApi: UsersService, private chRef: ChangeDetectorRef,  private router: Router) {  }
 
@@ -60,10 +61,15 @@ export class UsersComponent implements OnInit {
          .subscribe(res => {
             
           location.reload();
-          //this.router.navigate(['/users']);
 
               },
-          console.error
+              error => {
+                this.http_errors = true;
+      
+                  this.error_message = error 
+      
+      
+              }  
                     );
             
             }

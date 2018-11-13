@@ -88,13 +88,14 @@ class GetUpdateDeleteUser(Resource):
             return self.get(id)
 
         except ValidationError as err:
-            resp = jsonify({"error": err.messages})
+            resp = jsonify({"message": err.messages})
             resp.status_code = 401
             return resp
 
         except SQLAlchemyError as e:
             db.session.rollback()
-            resp = jsonify({"error": str(e)})
+
+            resp = jsonify({"message": str(e.orig.args)})
             resp.status_code = 401
             return resp
 
@@ -111,7 +112,7 @@ class GetUpdateDeleteUser(Resource):
 
         except SQLAlchemyError as e:
             db.session.rollback()
-            resp = jsonify({"error": str(e)})
+            resp = jsonify({"message": str(e.orig.args)})
             resp.status_code = 401
             return resp
 

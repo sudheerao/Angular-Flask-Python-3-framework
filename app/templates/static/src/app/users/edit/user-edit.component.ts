@@ -36,6 +36,8 @@ export class UserEditComponent implements OnInit  {
   
 
    id:number  =  parseInt(this.route.snapshot.paramMap.get('id'));
+   http_errors :boolean = false;
+   error_message:any;
   
 
   constructor(private usersApi: UsersService, private router: Router, private route: ActivatedRoute,) { 
@@ -118,8 +120,13 @@ export class UserEditComponent implements OnInit  {
                 this.router.navigate(['/users']);
 
                     },
-       console.error
-                 );
+                    error => {
+                      this.http_errors = true;
+            
+                        this.error_message = error // error path
+            
+            
+                    }                 );
         
         }
 

@@ -63,6 +63,17 @@
                 <button type="submit" [disabled]="!UserAddForm.valid" class="btn btn-success" >Add</button>
                 
             </form>
+
+            &nbsp;
+            
+            <div class="alert alert-danger"   *ngIf="http_errors" role="alert">
+                <p [innerHTML]=" error_message " ></p>
+
+            </div>
+
+            
+                        
+              
         </div>
     </div>
 </div>

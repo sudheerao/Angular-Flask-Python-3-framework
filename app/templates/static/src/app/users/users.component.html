@@ -54,6 +54,13 @@
                         
                     
                 </table>
+
+                &nbsp;
+            
+                <div class="alert alert-danger"   *ngIf="http_errors" role="alert">
+                    <p [innerHTML]=" error_message " ></p>
+    
+                </div>
                 </div>
             </div>
            

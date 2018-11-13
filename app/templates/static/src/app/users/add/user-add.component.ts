@@ -23,6 +23,8 @@ export class UserAddComponent implements OnInit {
     obj :any;
 
     UserAddForm:FormGroup;
+    http_errors :boolean = false;
+    error_message:any;
 
     ngOnInit ()   {
       
@@ -94,7 +96,13 @@ export class UserAddComponent implements OnInit {
         
         },
       
-        console.error
+        error => {
+          this.http_errors = true;
+
+            this.error_message = error // error path
+
+
+        }
         
         
       );

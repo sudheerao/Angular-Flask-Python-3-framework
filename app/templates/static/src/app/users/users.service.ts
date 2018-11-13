@@ -20,18 +20,22 @@ export class UsersService {
   }
 
   private handleError(error: HttpErrorResponse) {
-       
-    console.log(error.error)
-      // The backend returned an unsuccessful response code.
+             
+
+      if (error.error instanceof ErrorEvent) {
+        // A client-side or network error occurred. Handle it accordingly.
+
+        return throwError("A client or network error occured" + error.error.message);
+      } 
+      else {
+
+        // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
       return throwError(
-        ` code ${error.status}, ` +
-        ` ${error.error.message}`);
+        ` code ${error.status}, ` +   ` ${error.error.message}`);
        
-    
-    // return an observable with a user-facing error message
-   // return throwError( 
-    //  'Something bad happened; please try again later.');
+      }
+   
   };
   constructor(private http: HttpClient) { }
 

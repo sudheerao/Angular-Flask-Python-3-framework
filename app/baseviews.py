@@ -156,13 +156,14 @@ class SignUp(Resource):
 
         except ValidationError as err:
             print(err.messages)
-            resp = jsonify({"error": err.messages})
+            resp = jsonify({"message": err.messages})
             resp.status_code = 403
             return resp
 
         except SQLAlchemyError as e:
+           
             db.session.rollback()
-            resp = jsonify({"error": str(e)})
+            resp = jsonify({"message": str(e.orig.args)})
             print(str(e))
 
             resp.status_code = 403
