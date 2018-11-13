@@ -26,7 +26,7 @@ env:
 
 before_script:
   - psql -c 'create database fscafold;' -U postgres
-  - python scaffold.py scaffold/module.yaml
+  - python scaffold.py scaffold/blog.yaml
   - python db.py db init
   - python db.py db migrate
   - python db.py db upgrade
