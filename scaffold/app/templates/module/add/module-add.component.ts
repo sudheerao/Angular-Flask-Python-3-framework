@@ -1,118 +1,103 @@
-import { Component, OnInit } from '@angular/core';
-import { routerTransition } from '../../router.animations';
-import { Subscription } from 'rxjs';
-import { UsersService } from '../users.service';
-import {Router} from "@angular/router";
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {{ Component, OnInit }} from '@angular/core';
+import {{ routerTransition }} from '../../router.animations';
+import {{ Subscription }} from 'rxjs';
+import {{ {Resources}Service }} from '../{resources}.service';
+import {{Router}} from "@angular/router";
+import {{ FormGroup, FormControl, Validators }} from '@angular/forms';
 
 
 
 
-@Component({
-    selector: 'user-add',
-    templateUrl: './user-add.component.html',
-    styleUrls: ['./user-add.component.scss'],
+@Component({{
+    selector: '{resource}-add',
+    templateUrl: './{resource}-add.component.html',
+    styleUrls: ['./{resource}-add.component.scss'],
     animations: [routerTransition()]
-})
+}})
 
 
 
-export class UserAddComponent implements OnInit {
+export class {Resource}AddComponent implements OnInit {{
    
     userAddSubs: Subscription;
     obj :any;
 
-    UserAddForm:FormGroup;
+    {Resource}AddForm:FormGroup;
     http_errors :boolean = false;
     error_message:any;
 
-    ngOnInit ()   {
+    ngOnInit ()   {{
       
-      this.UserAddForm = new FormGroup(
+      this.{Resource}AddForm = new FormGroup(
     
-      {
-      email: new FormControl('', [
-      Validators.required,
+      {{
       
+        {FormControl_fields}
+
       
-          ]),
-      
-      name: new FormControl('',[
-        Validators.required,
-        
-        
-      ]),
+    
 
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(8),
-        
-        
-      ]),
-    },{updateOn: 'blur'} );
+     
+    }},{{updateOn: 'blur'}} );
 
-  }
+  }}
 
-  get name() { return this.UserAddForm.get('name'); }
-  get email() { return this.UserAddForm.get('email'); }
-
-  get password() { return this.UserAddForm.get('password'); }
+ {getter_fields}
 
 
-    constructor(private usersApi: UsersService, private router: Router) { 
-             }
+    constructor(private {resources}Api: {Resources}Service, private router: Router) {{ 
+             }}
  
  
   
  
-  onSubmit() { 
+  onSubmit() {{ 
      
  
-    this.obj = {
-        "data": {
-          "type": "users",
-          "attributes": {
-            "email" : this.UserAddForm.value.email,
-            "password" : this.UserAddForm.value.password,
-            "name" : this.UserAddForm.value.name,
-        }
+    this.obj = {{
+        "data": {{
+          "type": "{resources}",
+          "attributes": {{
+           
+            {attribute_fields}
+        }}
             
-          }
-        }
+          }}
+        }}
 
 
-    this.userAddSubs = this.usersApi
+    this.resourceAddSubs = this.resourcesApi
       .add(this.obj)
-      .subscribe(res => {
+      .subscribe(res => {{
          // console.log( res.data);
 
          
 
         
 
-         this.router.navigate(['/users']);
+         this.router.navigate(['/{resources}']);
 
 
         
-        },
+        }},
       
-        error => {
+        error => {{
           this.http_errors = true;
 
             this.error_message = error // error path
 
 
-        }
+        }}
         
         
       );
 
      
-}
+}}
  
  
 
-}
+}}
 
     
 

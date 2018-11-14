@@ -1,3 +1,38 @@
+# String to add Angular User Add
+
+user_add_edit_string = """ <div class="form-group">
+                                <input type="text" class="form-control input-underline input-lg" id="{field}" 
+                                         required    formControlName = "{field}" placeholder=" {Field}">
+
+                                         <div *ngIf="{field}.invalid && ({field}.dirty || {field}.touched)"
+                                                class="alert alert-danger">
+
+                                            <div *ngIf="{field}.errors.required">
+                                                {field} is required.
+                                            </div>
+                                            
+                                            
+                                            </div>
+                            </div> """
+
+#Add to module-add.component.ts
+
+FormControl_string = """
+       {field}: new FormControl('', [  Validators.required,]),
+       """
+
+getter_string = """
+
+            get {field}() {{ return this.{Resource}AddForm.get('{field}'); }}
+
+            """
+
+attribute_string = """
+
+             "{field}" : this.{Resource}AddForm.value.{field},
+                      """
+     
+
 ######### Protractor Tests ##########
 ## Page Objects
 pro_po_string = """

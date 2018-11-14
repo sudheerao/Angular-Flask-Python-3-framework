@@ -1,5 +1,4 @@
-sudo: required
-dist: trusty
+dist: osx
 
 language: python
 python:
@@ -8,8 +7,6 @@ python:
 # command to run tests
 script:
  - python tests/tests.py
-
-# - bash tests.bash
 
 addons:
   postgresql: "9.6"
@@ -31,3 +28,4 @@ before_script:
   - python run.py &
   - sleep 3
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+  - sleep 3
