@@ -66,19 +66,12 @@ export class {Resource}AddComponent implements OnInit {{
         }}
 
 
-    this.resourceAddSubs = this.resourcesApi
+    this.{resource}AddSubs = this.{resources}Api
       .add(this.obj)
-      .subscribe(res => {{
-         // console.log( res.data);
-
-         
-
+      .subscribe(res => {{    
         
-
          this.router.navigate(['/{resources}']);
 
-
-        
         }},
       
         error => {{

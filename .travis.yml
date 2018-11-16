@@ -24,7 +24,6 @@ before_script:
   - python db.py db init
   - python db.py db migrate
   - python db.py db upgrade
-  - sudo apt-get update -q
   - python run.py &
   - sleep 3
   - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &

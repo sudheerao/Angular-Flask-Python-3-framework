@@ -24,6 +24,9 @@ export class {Resources}Component implements OnInit {{
   // Our future instance of DataTable
   dataTable: any;
 
+  http_errors :boolean = false;
+  error_message:any;
+
   constructor(private {resources}Api: {Resources}Service, private chRef: ChangeDetectorRef) {{  }}
 
  
@@ -43,10 +46,37 @@ export class {Resources}Component implements OnInit {{
         this.dataTable = table.DataTable();
         // data tables end
         }},
-        console.error
+        error => {{
+          this.http_errors = true;
+
+            this.error_message = error 
+
+
+        }}  
       );
     
   }}
+
+  delete{Resource}(id : number )  {{
+
+    this.{resources}Api
+
+         .delete(id)
+         .subscribe(res => {{
+            
+          location.reload();
+
+              }},
+              error => {{
+                this.http_errors = true;
+      
+                  this.error_message = error 
+      
+      
+              }} 
+                    );
+            
+            }}
 
   ngOnDestroy() {{
     this.{resources}ListSubs.unsubscribe();

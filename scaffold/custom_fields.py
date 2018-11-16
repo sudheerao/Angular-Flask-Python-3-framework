@@ -31,6 +31,21 @@ attribute_string = """
 
              "{field}" : this.{Resource}AddForm.value.{field},
                       """
+
+#Add to module-edit.component.ts
+edit_FormControl_string = """
+    
+              "{field}" : res.data.attributes.{field},
+
+              """
+edit_FormControl_string = """
+
+                  "email" : this.{Resource}EditForm.value.email,
+                """  
+              
+
+
+ "name" : res.data.attributes.name,
      
 
 ######### Protractor Tests ##########

@@ -1,4 +1,6 @@
 <div [@routerTransition]>
+
+        <a class="btn rounded-btn" [routerLink]="['/resource-add']"> Add {Resource} </a>&nbsp;
     <app-page-header [heading]="'{Resources}'" [icon]="'fa-table'"></app-page-header>
     <div class="row">
         <div class="col col-xl-12 col-lg-12">
@@ -26,12 +28,23 @@
                                 {table_body}
 
                                 
+                                <td><a [routerLink]= "['/{resources}',  {resource}.id ]" class="btn btn-default btn-warning" 
+                                    role="button"  id="editButton"><i class="fa fa-edit"></i></a></td>
+                                <td> <button class="btn btn-default btn-danger" (click)="delete{Resource}({resource}.id)" 
+                                id="deleteButton"><i class="fa fa-trash-o"></i></button> </td>  
                               </tr>
                             </tbody>
                          
                         
                     
                 </table>
+
+                &nbsp;
+            
+                <div class="alert alert-danger"   *ngIf="http_errors" role="alert">
+                    <p [innerHTML]=" error_message " ></p>
+    
+                </div>
                 </div>
             </div>
            
