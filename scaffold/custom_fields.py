@@ -146,11 +146,7 @@ update_decimal_test = "48.6789899"
 update_text_test = "How to build CRUD app with Python, Flask, SQLAlchemy and MySQL. Som reand456989@#$%^%> <html/>"
 
 
-########### resource index.html Fields ##########
-table_header_field = """
-                         <th>{Field}</th>"""
-table_row_field = """
-                         <td>{{{{ {resource}.attributes.{field} }}}}</td>"""
+
 
 # Radio button default checked
 radio_button_string = """ $scope.{resource}.data = {{ "attributes ": {{ "{field}" : "true" }} }} """

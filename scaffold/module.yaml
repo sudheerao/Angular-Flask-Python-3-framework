@@ -1,8 +1,9 @@
- users:
- - email:string
- - password:string
- - name:string
- - createddate:datetime
- - createdby:string
- - updateddate:datetime
- - updatedby:string
+ comments:
+  - author:string
+  - body:text
+  - email:email
+  - approved:boolean
+  - number:integer
+  - created_on:datetime
+
+ 
