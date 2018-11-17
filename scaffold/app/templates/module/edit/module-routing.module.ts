@@ -1,10 +1,10 @@
 import {{ NgModule }} from '@angular/core';
 import {{ Routes, RouterModule }} from '@angular/router';
-import {{ {Resources}EditComponent }} from './{resources}-edit.component';
+import {{ {Resource}EditComponent }} from './{resources}-edit.component';
 
 const routes: Routes = [
     {{
-        path: '', component: {Resources}EditComponent
+        path: '', component: {Resource}EditComponent
     }}
 ];
 
