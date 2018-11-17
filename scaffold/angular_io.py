@@ -19,15 +19,6 @@ object_scaffold_add_files = os.listdir(path="scaffold/app/templates/module/add")
 object_scaffold_edit_files = os.listdir(path="scaffold/app/templates/module/edit")
 
 
-
-
-attributes: Dict[str, str] = {
-    "Adam": "string",
-    "Adam": "string",
-    
-}
-
-
 def make_plural(resource):
     # https://pypi.python.org/pypi/inflect
     p = inflect.engine()
@@ -279,11 +270,3 @@ def create_angular_files(object_name:str , attributes:Dict[str,str]):
      
         
     
-
-
-
-
-
-
-
-create_angular_files("test", attributes)

@@ -10,6 +10,7 @@ from scaffold.custom_fields import *
 from scaffold.modules.replace_string import replace_string, \
 layout_route_string, menu_string, test_script_string, conf_js_string, app_module_string,app_import_string
 from scaffold.modules.errors import BlueprintError
+from angular_io import create_angular_files
 
 blueprint_file = 'app/__init__.py'
 test_script = 'tests.bash'
@@ -38,10 +39,10 @@ def make_plural(resource):
         resources = p.plural(resource)
         return resource, resources
 
-def generate_files(module_path, angular_dir):
+#Generate Flask API files
+def generate_files(module_path):
 
-    app_files = ['views.py', 'models.py', '__init__.py', 'module-routing.module-ts', 'module.component-ts', 'module.component.html',
-                 'module.component.scss', 'module.module-ts', 'module.service-ts', 'module.service.spec-ts' 'tests.py']
+    app_files = ['views.py', 'models.py', '__init__.py',  'tests.py']
 
     for file in app_files:
 
@@ -73,79 +74,7 @@ def generate_files(module_path, angular_dir):
                     for line in old_file:
                         new_file.write(line)
 
-        # Tests
-        elif file == "tests.py":
-            with open(os.path.join(module_path, 'test_{}.py'.format(resources)), "w") as new_file:
-                with open("scaffold/app/tests.py", "r") as old_file:
-                    for line in old_file:
-                        new_file.write(line.format(resource=resource, resources=resources,
-                                                   Resources=resources.title(),
-                                                   test_add_fields=json.dumps(
-                                                       test_add_fields),
-                                                   test_update_fields=json.dumps(
-                                                       test_update_fields)))
-
-        # Generate Template Files
-        # Need to add template resource path
-        elif file == "module-routing.module-ts":
-            with open(os.path.join(angular_dir, '{resources}-routing.module.ts'.format(resources=resources)), "w") as new_file:
-                with open(os.path.join(path_scaffold_template, "module-routing.module-ts"), "r") as old_file:
-                    for line in old_file:
-                        new_file.write(line.format(resource=resource,
-                                                   resources=resources,
-                                                   Resources=resources.title(),
-                                                   Resource=resource.title()
-                                                   ))
-
-        elif file == "module.component-ts":
-            with open(os.path.join(angular_dir, '{resources}.component.ts'.format(resources=resources)), "w") as new_file:
-                with open(os.path.join(path_scaffold_template,"module.component-ts"), "r") as old_file:
-                    for line in old_file:
-                        new_file.write(line.format(resource=resource, resources=resources,
-                                                   Resource=resource.title(),
-                                                   Resources=resources.title()))
-        elif file == "module.component.html":
-            with open(os.path.join(angular_dir, '{resources}.component.html'.format(resources=resources)), "w") as new_file:
-                with open(os.path.join(path_scaffold_template, "module.component.html"), "r") as old_file:
-                    for line in old_file:
-                        new_file.write(line.format(resource=resource, resources=resources,
-                                                   Resource=resource.title(),
-                                                   Resources=resources.title(),
-                                                   table_headers=table_headers,
-                                                   table_body=table_body))
-        elif file == "module.component.scss":
-            with open(os.path.join(angular_dir, '{resources}.component.scss'.format(resources=resources)), "w") as new_file:
-                with open(os.path.join(path_scaffold_template, "module.component.scss"), "r") as old_file:
-                    for line in old_file:
-                        new_file.write(line.format(resource=resource, resources=resources,
-                                                   Resource=resource.title()))
-        elif file == "module.module-ts":
-            with open(os.path.join(angular_dir, '{resources}.module.ts'.format(resources=resources)), "w") as new_file:
-                with open(os.path.join(path_scaffold_template,"module.module-ts"), "r") as old_file:
-                    for line in old_file:
-                        new_file.write(line.format(resource=resource, resources=resources,
-                                                   Resource=resource.title(),
-                                                   Resources=resources.title()
-                                                   ) )
-        elif file == "module.service-ts":
-            with open(os.path.join(angular_dir, '{resources}.service.ts'.format(resources=resources)), "w") as new_file:
-                with open(os.path.join(path_scaffold_template,"module.service-ts"), "r") as old_file:
-                    for line in old_file:
-                        new_file.write(line.format(resource=resource, 
-                                                   resources=resources,
-                                                   Resource=resource.title(),
-                                                   Resources=resources.title()
-                                                   ))
-        elif file == "module.service.spec-ts":
-            with open(os.path.join(angular_dir, '{resources}.service.spec.ts'.format(resources=resources)), "w") as new_file:
-                with open(os.path.join(path_scaffold_template, "module.service.spec-ts"), "r") as old_file:
-                    for line in old_file:
-                        new_file.write(line.format(resource=resource, resources=resources,
-                                                   Resource=resource.title(), Resources=resources.title(),
-                                                   protractor_page_objects=protractor_page_objects,
-                                                   protractor_edit_elments=protractor_edit_elments,
-                                                   protractor_add_elments=protractor_add_elments
-                                                   ))
+      
         
 
 def register_blueprints():
@@ -215,30 +144,6 @@ with open(yaml_file, "r") as file:
         # Start strings to insert into views
         add_fields = ""
 
-        # strings to insert into _form.html
-        form_args = []
-        form_fields = ""
-
-        # strings to insert into update.html
-        update_form_args = ""
-
-        # strings to insert into module.component.html
-        table_headers = ""
-        table_body= ""
-
-        # strings to insert into tests.py
-        test_add_fields = {}
-        test_update_fields = {}
-
-        # Fields to insert into controller.js
-
-        radio_button_default =""
-
-        # Fields to add to protractor spec.js
-        protractor_page_objects = ""
-        protractor_edit_elments = ""
-        protractor_add_elments = ""
-
         for f in fields:
             field, field_type = f.split(':')
             if field_type == "string":
@@ -246,66 +151,28 @@ with open(yaml_file, "r") as file:
     {} = db.Column(db.String(250), nullable=False)""".format(field)
                 schema += """
     {} = fields.String(validate=not_blank)""".format(field)
-                test_add_fields[field] = string_test
-                test_update_fields[field] = update_string_test
-                protractor_page_objects += pro_po_string.format(field=field, Field=field.title())
-                protractor_edit_elments += update_pro_string.format(field=field, resource=resource, Field=field.title())
-                protractor_add_elments += pro_string.format(field=field, resource=resource, Field=field.title())
-                form_fields += form_field.format(field=field, Field=field.title(
-                ), field_type="text", resource=resource, Resource=resource.title())
+                
 
             elif field_type == "boolean":
                 db_rows += """
     {} = db.Column(db.Integer, nullable=False)""".format(field)
                 schema += """
     {} = fields.Integer(required=True)""".format(field)
-                form_fields += boolean_form_string.format(Field=field.title(),
-                                                          field=field, resource=resource, field_type=field_type)
-                test_add_fields[field] = boolean_test
-                test_update_fields[field] = update_boolean_test
-                protractor_edit_elments += update_pro_boolean.format(field=field)
-                protractor_add_elments += pro_boolean.format(field=field)
-                radio_button_default += radio_button_string.format(resource=resource, field=field)
+               
 
             elif field_type == "integer":
                 db_rows += """
     {} = db.Column(db.Integer, nullable=False)""".format(field)
                 schema += """
     {} = fields.Integer(required=True)""".format(field)
-                form_fields += form_field.format(field=field, Field=field.title(
-                ), field_type="number", resource=resource, Resource=resource.title())
-                test_add_fields[field] = integer_test
-                test_update_fields[field] = update_integer_test
-                protractor_page_objects += pro_po_string.format(field=field, Field=field.title())
-                protractor_edit_elments += update_pro_int.format(field=field, resource=resource, Field=field.title())
-                protractor_add_elments += pro_int.format(field=field, resource=resource, Field=field.title())
-
-
-            elif field_type == "biginteger":
-                db_rows += """
-    {} = db.Column(db.BigInteger, nullable=False)""".format(field)
-                schema += """
-    {} = fields.Integer(required=True)""".format(field)
-                form_fields += form_field.format(field=field, Field=field.title(
-                ), field_type="number", resource=resource, Resource=resource.title())
-                test_add_fields[field] = big_integer_test
-                test_update_fields[field] = update_big_integer_test
-                protractor_page_objects += pro_po_string.format(field=field, Field=field.title())
-                protractor_edit_elments += update_pro_big_int.format(field=field, resource=resource, Field=field.title())
-                protractor_add_elments += pro_big_int.format(field=field, resource=resource, Field=field.title())
+             
 
             elif field_type == "email":
                 db_rows += """
     {} = db.Column(db.String(250), nullable=False)""".format(field)
                 schema += """
     {} = fields.Email(validate=not_blank)""".format(field)
-                form_fields += form_field.format(field=field, Field=field.title(
-                ), field_type=field_type, resource=resource, Resource=resource.title())
-                test_add_fields[field] = email_test
-                test_update_fields[field] = update_email_test
-                protractor_page_objects += pro_po_string.format(field=field, Field=field.title())
-                protractor_edit_elments += update_pro_email.format(field=field, resource=resource, Field=field.title())
-                protractor_add_elments += pro_email.format(field=field, resource=resource, Field=field.title())
+               
 
 
             elif field_type == "url":
@@ -313,13 +180,7 @@ with open(yaml_file, "r") as file:
     {} = db.Column(db.String(250), nullable=False)""".format(field)
                 schema += """
     {} = fields.URL(validate=not_blank)""".format(field)
-                form_fields += form_field.format(field=field, Field=field.title(
-                ), field_type=field_type, resource=resource, Resource=resource.title())
-                test_add_fields[field] = url_test
-                test_update_fields[field] = update_url_test
-                protractor_page_objects += pro_po_string.format(field=field, Field=field.title())
-                protractor_edit_elments += update_pro_url.format(field=field, resource=resource, Field=field.title())
-                protractor_add_elments += pro_url.format(field=field, resource=resource, Field=field.title())
+                
 
 
             elif field_type == "datetime":
@@ -327,13 +188,7 @@ with open(yaml_file, "r") as file:
     {} = db.Column(db.TIMESTAMP,server_default=db.func.current_timestamp(),nullable=False)""".format(field)
                 schema += """
     {} = fields.DateTime(required=True)""".format(field)
-                form_fields += form_field.format(field=field, Field=field.title(
-                ), field_type=field_type, resource=resource, Resource=resource.title())
-                test_add_fields[field] = date_time_test
-                test_update_fields[field] = update_date_time_test
-                protractor_page_objects += pro_po_string.format(field=field, Field=field.title())
-                protractor_edit_elments += update_pro_timestamp.format(field=field, resource=resource, Field=field.title())
-                protractor_add_elments += pro_timestamp.format(field=field, resource=resource, Field=field.title())
+                
 
 
             elif field_type == "date":
@@ -341,38 +196,21 @@ with open(yaml_file, "r") as file:
     {} = db.Column(db.Date, nullable=False)""".format(field)
                 schema += """
     {} = fields.Date(required=True)""".format(field)
-                form_fields += date_field_string.format(field=field, Field=field.title(
-                ), field_type=field_type, resource=resource, Resource=resource.title())
-                test_add_fields[field] = date_test
-                test_update_fields[field] = update_date_test
-                protractor_edit_elments += update_pro_date.format(field=field)
-                protractor_add_elments += pro_date.format(field=field)
+               
 
             elif field_type == "decimal":
                 db_rows += """
     {} = db.Column(db.Numeric, nullable=False)""".format(field)
                 schema += """
     {} = fields.Decimal(as_string=True)""".format(field)
-                form_fields += decimal_form_string.format(Field=field.title(),
-                                                          field=field, resource=resource)
-                test_add_fields[field] = decimal_test
-                test_update_fields[field] = update_decimal_test
-                protractor_page_objects += pro_po_string.format(field=field, Field=field.title())
-                protractor_edit_elments += update_pro_decimal.format(field=field, resource=resource, Field=field.title())
-                protractor_add_elments += pro_decimal.format(field=field, resource=resource, Field=field.title())
+                
 
             elif field_type == "text":
                 db_rows += """
     {} = db.Column(db.Text, nullable=False)""".format(field)
                 schema += """
     {} = fields.String(validate=not_blank)""".format(field)
-                form_fields += text_form_string.format(Field=field.title(),
-                                                       field=field, resource=resource)
-                test_add_fields[field] = text_test
-                test_update_fields[field] = update_text_test
-                protractor_page_objects += pro_po_string.format(field=field, Field=field.title())
-                protractor_edit_elments += update_pro_text.format(field=field, resource=resource, Field=field.title())
-                protractor_add_elments += pro_text.format(field=field, resource=resource, Field=field.title())
+               
 
             # models
             meta += """ '{}', """.format(field)
@@ -382,30 +220,14 @@ with open(yaml_file, "r") as file:
             # Views
             add_fields += add_string.format(field)
 
-            #_form.html
-            #form_args.append("""{resource}_{field} = ''""".format(resource=resource, field=field))
-
-            #module.component.html
-            table_headers += table_header_field.format(field=field, Field=field.title())
-            table_body += table_row_field.format(field=field, resource=resource)
-
-            #update.html
-           # update_form_args += """{resource}_{field} = {resource}.{field}, """.format(resource=resource, field=field)
-
-            # controller.js
-
-
-
-        # Generate files with the new fields
-        module_dir = os.path.join('app', resources)
-        angular_dir = os.path.join('app/templates/static/src/app/', resources)
 
         try:
             os.mkdir(module_dir)
-            try:
-                os.makedirs(angular_dir)
-                generate_files(module_dir, angular_dir)
-                print('{0}  & {1} created successfully'.format(module_dir, angular_dir))
+            try
+                
+                generate_files(module_dir)
+                create_angular_files(module, fields)
+                print("files created successfully")
                 register_blueprints()
                 # Update service in app.module.ts
                 replace_string(resource, resources , app_js_file, "// service", app_module_string)
@@ -419,16 +241,7 @@ with open(yaml_file, "r") as file:
                 # Add menus to the sidebar.html
                 replace_string(
                     resource, resources, sidebar_file, "<!-- menu -->", menu_string)
-                """
-                # Add tests to test.bash
-                replace_string(
-                    resource, resources, test_script, "#TESTS", test_script_string)
-
-
-                # Add tests to conf.js
-                replace_string(
-                    resource, resources, conf_js_file, "//Specs", conf_js_string)
-                """
+              
 
                 #run_autopep8()
             except:
