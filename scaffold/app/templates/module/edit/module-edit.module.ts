@@ -1,6 +1,6 @@
 import {{ NgModule }} from '@angular/core';
 import {{ CommonModule }} from '@angular/common';
-import {{ {Resources}RoutingModule }} from './{resource}-routing.module';
+import {{ {Resources}RoutingModule }} from './{resources}-routing.module';
 import {{ {Resource}EditComponent }} from './{resources}-edit.component';
 import {{ PageHeaderModule }} from '../../shared';
 import {{ ReactiveFormsModule }} from '@angular/forms';

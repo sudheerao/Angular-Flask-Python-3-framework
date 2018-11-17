@@ -1,7 +1,7 @@
 import {{ NgModule }} from '@angular/core';
 import {{ CommonModule }} from '@angular/common';
 
-import {{ {Resource}AddRoutingModule }} from './{resources}-add-routing.module';
+import {{ {Resource}AddRoutingModule }} from './{resources}-routing.module';
 import {{ {Resource}AddComponent }} from './{resources}-add.component';
 import {{ PageHeaderModule }} from '../../shared';
 import {{ ReactiveFormsModule }} from '@angular/forms';
