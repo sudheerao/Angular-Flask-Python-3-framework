@@ -18,8 +18,8 @@ app_module_string = """
 layout_route_string = """
                 // route
                 {{ path: '{resources}', loadChildren: '../{resources}/{resources}.module#{Resources}Module' }},
-                {{ path: '{resource}-add', loadChildren: '../{resources}/add/{resources}-add.module#{Resources}AddModule' }},
-                 {{ path: '{resources}/:id', loadChildren: '../{resources}/edit/{resources}-edit.module#{Resources}EditModule' }},
+                {{ path: '{resource}-add', loadChildren: '../{resources}/add/{resources}-add.module#{Resource}AddModule' }},
+                 {{ path: '{resources}/:id', loadChildren: '../{resources}/edit/{resources}-edit.module#{Resource}EditModule' }},
                 """
 
 #   String to add to sidebar.component.html

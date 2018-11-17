@@ -43,7 +43,7 @@ export class {Resources}Service {{
 
    
 
-    return this.http.get(`/api/v1/{Resource}s.json`, this.httpOptions)
+    return this.http.get(`/api/v1/{resources}.json`, this.httpOptions)
     
       .pipe(
         
@@ -56,7 +56,7 @@ export class {Resources}Service {{
   add({resource}: any): Observable<any> {{
 
     
-    return this.http.post(`/api/v1/signup.json`, {resource}, this.httpOptions)
+    return this.http.post(`/api/v1/{resources}.json`, {resource}, this.httpOptions)
       .pipe(
         catchError(this.handleError)          
         
@@ -66,18 +66,7 @@ export class {Resources}Service {{
   
 }}
 
-login({resource}: any): Observable<any> {{
 
-    
-  return this.http.post(`/api/v1/login.json`, {resource})
-    .pipe(
-      catchError(this.handleError)          
-      
-      )
-  
-
-
-}}
 
 get{Resource}(id:number): Observable<any> {{
 
