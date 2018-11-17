@@ -1,6 +1,5 @@
  comments:
   - author:string
-  - body:text
   - email:email
   - approved:boolean
   - number:integer
