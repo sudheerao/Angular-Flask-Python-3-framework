@@ -45,7 +45,7 @@ edit_attribute_string = """
                 """  
 
 edit_getter_string =  """
-        get {field}() { return this.{Resource}EditForm.get('{field}'); }
+        get {field}() {{ return this.{Resource}EditForm.get('{field}'); }}
 
         """
 
