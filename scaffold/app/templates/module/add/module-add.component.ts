@@ -10,8 +10,8 @@ import {{ FormGroup, FormControl, Validators }} from '@angular/forms';
 
 @Component({{
     selector: '{resource}-add',
-    templateUrl: './{resource}-add.component.html',
-    styleUrls: ['./{resource}-add.component.scss'],
+    templateUrl: './{resources}-add.component.html',
+    styleUrls: ['./{resources}-add.component.scss'],
     animations: [routerTransition()]
 }})
 

@@ -62,6 +62,7 @@ def create_angular_files(object_name:str , attributes:Dict[str,str]):
         #Fields to add to edit.component.ts
         edit_FormControl_value_strings = ""
         edit_attribute_strings = ""
+        edit_getter_strings = ""
 
         #Fields to add to add.component.ts
         add_FormControl_init_strings = ""
@@ -86,6 +87,11 @@ def create_angular_files(object_name:str , attributes:Dict[str,str]):
                 #Need to add backend code    
                 elif field_type == "password":
                     angular_form_fields += user_add_edit_string.format(field=field,type="password")
+                elif field_type == "datetime":
+                    table_headers += table_header_field.format(Field=Field)
+                    table_rows += table_row_field.format(field=field, resource=resource)
+                
+                    continue   
                 else:
                     angular_form_fields += user_add_edit_string.format(field=field,type="text")
 
@@ -94,6 +100,7 @@ def create_angular_files(object_name:str , attributes:Dict[str,str]):
                 table_rows += table_row_field.format(field=field, resource=resource)
                 edit_FormControl_value_strings += edit_FormControl_value_string.format(field=field)
                 edit_attribute_strings += edit_attribute_string.format(field=field, Resource=Resource)
+                edit_getter_strings += edit_getter_string.format(field=field, Resource=Resource)
                 add_FormControl_init_strings += FormControl_string.format(field=field)
                 add_getter_strings += getter_string.format(field=field, Resource=Resource)
                 add_attribute_strings += attribute_string.format(field=field, Resource=Resource)
@@ -241,7 +248,8 @@ def create_angular_files(object_name:str , attributes:Dict[str,str]):
                                                     Resources=resources.title(),
                                                     edit_FormControl_strings= add_FormControl_init_strings,
                                                     edit_FormControl_value_strings = edit_FormControl_value_strings,
-                                                    edit_attributes = edit_attribute_strings))
+                                                    edit_attributes = edit_attribute_strings,
+                                                    edit_getter_fields=edit_getter_strings))
            
             elif file == "module-edit.component.scss":
                 with open(os.path.join(object_edit_dir, '{resources}-edit.component.scss'.format(resources=resources)), "w") as new_file:

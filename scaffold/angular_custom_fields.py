@@ -43,6 +43,12 @@ edit_attribute_string = """
 
                   "{field}" : this.{Resource}EditForm.value.{field},
                 """  
+
+edit_getter_string =  """
+        get {field}() { return this.{Resource}EditForm.get('{field}'); }
+
+        """
+
               
 ########### module.component.html Fields ##########
 table_header_field = """

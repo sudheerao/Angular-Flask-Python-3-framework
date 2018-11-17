@@ -95,6 +95,8 @@ def register_blueprints():
     else:
         raise BlueprintError()
 
+        
+
 
 def clean_up(module_path):
     if os.path.isdir(module_path):
@@ -113,8 +115,10 @@ def run_autopep8():
 
 def run_ngbuild():
     try:
+        os.chdir("app/templates/static/")
         cmd_output = subprocess.check_output(
             ['ng', 'build', '--prod'])
+        print(cmd_output)    
         print("Ran Ng Build --prod")
     except subprocess.CalledProcessError:
         print("Ng build --prod failed")
@@ -240,7 +244,7 @@ with open(yaml_file, "r") as file:
                 replace_string(
                     resource, resources, sidebar_file, "<!-- menu -->", menu_string)
               
-
+                run_ngbuild()
                 #run_autopep8()
             except:
                 clean_up(module_dir)

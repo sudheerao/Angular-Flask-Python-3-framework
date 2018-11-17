@@ -5,9 +5,9 @@ import {{ FormGroup, FormControl, Validators }} from '@angular/forms';
 
 
 @Component({{
-  selector: 'app-edit',
-  templateUrl: './{resource}-edit.component.html',
-  styleUrls: ['./{resource}-edit.component.scss']
+  selector: '{resource}-edit',
+  templateUrl: './{resources}-edit.component.html',
+  styleUrls: ['./{resources}-edit.component.scss']
 }})
 export class {Resource}EditComponent implements OnInit  {{
 
@@ -24,6 +24,7 @@ export class {Resource}EditComponent implements OnInit  {{
    http_errors :boolean = false;
    error_message:any;
   
+    {edit_getter_fields}
 
   constructor(private {resources}Api: {Resources}Service, private router: Router, private route: ActivatedRoute,) {{ 
    
