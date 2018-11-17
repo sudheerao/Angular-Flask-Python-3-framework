@@ -56,7 +56,7 @@ export class {Resources}Service {{
   add({resource}: any): Observable<any> {{
 
     
-    return this.http.post<{Resource}>(`/api/v1/signup.json`, {resource}, this.httpOptions)
+    return this.http.post(`/api/v1/signup.json`, {resource}, this.httpOptions)
       .pipe(
         catchError(this.handleError)          
         
@@ -69,7 +69,7 @@ export class {Resources}Service {{
 login({resource}: any): Observable<any> {{
 
     
-  return this.http.post<{Resource}>(`/api/v1/login.json`, {resource})
+  return this.http.post(`/api/v1/login.json`, {resource})
     .pipe(
       catchError(this.handleError)          
       
@@ -83,7 +83,7 @@ get{Resource}(id:number): Observable<any> {{
 
   let url = '/api/v1/{resources}/' +id + '.json';
 
-  return this.http.get<{Resource}>(url, this.httpOptions)
+  return this.http.get(url, this.httpOptions)
     .pipe(
       catchError(this.handleError)          
       
@@ -98,7 +98,7 @@ get{Resource}(id:number): Observable<any> {{
 
     let url = '/api/v1/{resources}/' +id + '.json';
       
-    return this.http.patch<{Resource}>(url, {resource}, this.httpOptions)
+    return this.http.patch(url, {resource}, this.httpOptions)
       .pipe(
         catchError(this.handleError)          
         
@@ -112,7 +112,7 @@ get{Resource}(id:number): Observable<any> {{
 
       let url = '/api/v1/{resources}/' +id + '.json';
         
-      return this.http.delete<{Resource}>(url, this.httpOptions)
+      return this.http.delete(url, this.httpOptions)
         .pipe(
           catchError(this.handleError)          
           
