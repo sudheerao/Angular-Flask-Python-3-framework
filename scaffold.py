@@ -183,13 +183,13 @@ with open(yaml_file, "r") as file:
     {} = fields.URL(validate=not_blank)""".format(field)
                 
 
-
+            #Will be auto populated at the db level
             elif field_type == "datetime":
                 db_rows += """
     {} = db.Column(db.TIMESTAMP,server_default=db.func.current_timestamp(),nullable=False)""".format(field)
                 schema += """
-    {} = fields.DateTime(required=True)""".format(field)
-                
+    {} = fields.DateTime()""".format(field)
+                continue
 
 
             elif field_type == "date":
