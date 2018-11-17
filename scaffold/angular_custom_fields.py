@@ -1,4 +1,4 @@
-# String to add Angular User Add
+# String for add/edit.component.html
 
 user_add_edit_string = """ <div class="form-group">
                                 <input type="{type}" class="form-control input-underline input-lg" id="{field}" 
@@ -17,6 +17,7 @@ user_add_edit_string = """ <div class="form-group">
 
 #Add to module-add.component.ts
 
+#Common for edit and add
 FormControl_string = """
        {field}: new FormControl('', [  Validators.required,]),
        """
@@ -33,12 +34,12 @@ attribute_string = """
                       """
 
 #Add to module-edit.component.ts
-edit_FormControl_init_string = """
+edit_FormControl_value_string = """
     
               "{field}" : res.data.attributes.{field},
 
               """
-edit_FormControl_string = """
+edit_attribute_string = """
 
                   "{field}" : this.{Resource}EditForm.value.{field},
                 """  

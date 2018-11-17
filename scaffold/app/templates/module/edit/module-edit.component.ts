@@ -13,7 +13,7 @@ export class {Resource}EditComponent implements OnInit  {{
 
    {Resource}EditForm = new FormGroup({{
     
-      {edit_FormControl_init_strings}
+      {edit_FormControl_strings}
      
   }});
 
@@ -39,7 +39,7 @@ export class {Resource}EditComponent implements OnInit  {{
        this.{Resource}EditForm.setValue({{
         
 
-        {edit_FormControl_strings}
+        {edit_FormControl_value_strings}
         
 
        }},
@@ -72,7 +72,7 @@ export class {Resource}EditComponent implements OnInit  {{
               "data": {{
                 "type": "{resources}",
                 "attributes": {{
-                  {edit_FormControl_fields}
+                  {edit_attributes}
               }}
                   
                 }}
