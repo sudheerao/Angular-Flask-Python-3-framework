@@ -242,6 +242,8 @@ with open(yaml_file, "r") as file:
                 # Add menus to the sidebar.html
                 replace_string(
                     resource, resources, sidebar_file, "<!-- menu -->", menu_string)
+                # Add routes __init__.py
+                replace_string(resource,resources,blueprint_file, "#app_route", app_route)    
               
                 run_ngbuild()
                 #run_autopep8()

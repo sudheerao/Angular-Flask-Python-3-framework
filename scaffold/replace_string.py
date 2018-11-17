@@ -34,6 +34,12 @@ menu_string ="""
 
                                     """
 
+#String to add to __init__.py for routes
+app_route = """
+    #app-route  
+    @app.route('/{resources')
+           """
+
 
 
 def replace_string(resource, resources, file, string_to_insert_after, new_string):

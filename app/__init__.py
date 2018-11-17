@@ -23,6 +23,7 @@ def create_app(config_filename):
     def file(filename):
         return send_from_directory(os.path.join(app.root_path, 'templates/static/dist'), filename)
     
+    #app-route
     @app.route('/users')
     @app.route('/')
     @app.route('/login')
