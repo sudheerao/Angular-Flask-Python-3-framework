@@ -6,7 +6,7 @@ import subprocess
 import json
 import yaml
 import inflect
-from angular_custom_fields import *
+from scaffold.angular_custom_fields import *
 from typing import Dict, List
 
 
@@ -70,7 +70,8 @@ def create_angular_files(object_name:str , attributes:Dict[str,str]):
 
 
 
-        for field, field_type in attributes.items():
+        for attribute in attributes:
+                field, field_type = attribute.split(':')
                 Field=field.title()
                 if field_type == "integer":
                     angular_form_fields += user_add_edit_string.format(field=field,type="number")

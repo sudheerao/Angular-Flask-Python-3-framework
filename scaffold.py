@@ -7,10 +7,9 @@ import json
 import yaml
 import inflect
 from scaffold.custom_fields import *
-from scaffold.modules.replace_string import replace_string, \
-layout_route_string, menu_string, test_script_string, conf_js_string, app_module_string,app_import_string
+from scaffold.replace_string import *
 from scaffold.modules.errors import BlueprintError
-from angular_io import create_angular_files
+from scaffold.angular_io import create_angular_files
 
 blueprint_file = 'app/__init__.py'
 test_script = 'tests.bash'
@@ -100,8 +99,7 @@ def register_blueprints():
 def clean_up(module_path):
     if os.path.isdir(module_path):
         shutil.rmtree(module_path)
-    if os.path.isdir(angular_dir):
-        shutil.rmtree(angular_dir)
+ 
 
 #change to exclude template folder
 def run_autopep8():
@@ -220,10 +218,10 @@ with open(yaml_file, "r") as file:
             # Views
             add_fields += add_string.format(field)
 
-
+        module_dir = os.path.join('app', resources)
         try:
             os.mkdir(module_dir)
-            try
+            try:
                 
                 generate_files(module_dir)
                 create_angular_files(module, fields)

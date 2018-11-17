@@ -32,18 +32,7 @@ menu_string ="""
 
                                     """
 
-#Strings to test.bash
-test_script_string = """
-#TESTS
-#Tests for {resources}
-protractor  app/templates/{resources}/conf.js  &&
-python app/{resources}/test_{resources}.py
-#End Tests for {resources}"""
 
-
-conf_js_string="""
-   //Specs
-   , 'app/templates/{resources}/spec.js' """
 
 def replace_string(resource, resources, file, string_to_insert_after, new_string):
 
