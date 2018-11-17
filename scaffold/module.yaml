@@ -1,8 +1,9 @@
- comments:
-  - author:string
-  - email:email
-  - approved:boolean
-  - number:integer
-  - created_on:datetime
-
+ customers:
+  - name:string
+  - city:string
+  - devices:string
+  - created:datetime
+  - createdBy:string
+  - updated:datetime
+  - updatedBy:string
  

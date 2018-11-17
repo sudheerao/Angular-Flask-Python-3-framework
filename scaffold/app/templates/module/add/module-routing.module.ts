@@ -1,10 +1,10 @@
 import {{ NgModule }} from '@angular/core';
 import {{ Routes, RouterModule }} from '@angular/router';
-import {{ {Resources}Component }} from './{resources}.component';
+import {{ {Resource}AddComponent }} from './{resources}-add.component';
 
 const routes: Routes = [
     {{
-        path: '', component: {Resources}Component
+        path: '', component: {Resource}AddComponent
     }}
 ];
 
@@ -12,5 +12,5 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 }})
-export class {Resources}RoutingModule {{
+export class {Resource}AddRoutingModule {{
 }}

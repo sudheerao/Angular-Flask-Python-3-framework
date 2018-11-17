@@ -42,15 +42,9 @@ export class {Resource}EditComponent implements OnInit  {{
         {edit_FormControl_value_strings}
         
 
-       }},
+       }}
        
-       error => {{
-        this.http_errors = true;
-
-          this.error_message = error // error path
-
-
-      }}    )
+          )
        
        
       }});

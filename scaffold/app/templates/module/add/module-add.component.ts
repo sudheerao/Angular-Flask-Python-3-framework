@@ -19,7 +19,7 @@ import {{ FormGroup, FormControl, Validators }} from '@angular/forms';
 
 export class {Resource}AddComponent implements OnInit {{
    
-    userAddSubs: Subscription;
+    {resource}AddSubs: Subscription;
     obj :any;
 
     {Resource}AddForm:FormGroup;
