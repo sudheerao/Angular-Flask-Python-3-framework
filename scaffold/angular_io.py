@@ -89,7 +89,7 @@ def create_angular_files(object_name:str , attributes:Dict[str,str]):
                     angular_form_fields += user_add_edit_string.format(field=field,type="password")
                 elif field_type == "datetime":
                     table_headers += table_header_field.format(Field=Field)
-                    table_rows += table_row_field.format(field=field, resource=resource)
+                    table_rows += table_date_row_field.format(field=field, resource=resource)
                 
                     continue   
                 else:

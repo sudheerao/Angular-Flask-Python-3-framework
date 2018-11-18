@@ -37,9 +37,9 @@
                                 
                          <td>{{ user.attributes.email }}</td>
                          <td>{{ user.attributes.name }}</td>
-                         <td>{{ user.attributes.createddate | date:'medium'  }}</td>
+                         <td>{{ user.attributes.createddate | date:'long'  }}</td>
                          <td>{{ user.attributes.createdby }}</td>
-                         <td>{{ user.attributes.updateddate | date:'medium' }}</td>
+                         <td>{{ user.attributes.updateddate | date:'long' }}</td>
                          <td>{{ user.attributes.updatedby }}</td>
                          <td><a [routerLink]= "['/users',  user.id ]" class="btn btn-default btn-warning" 
                             role="button"  id="editButton"><i class="fa fa-edit"></i></a></td>

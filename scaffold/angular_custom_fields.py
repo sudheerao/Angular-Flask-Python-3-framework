@@ -55,3 +55,7 @@ table_header_field = """
                          <th>{Field}</th>"""
 table_row_field = """
                          <td>{{{{ {resource}.attributes.{field} }}}}</td>"""
+
+                                                  
+table_date_row_field = """
+                         <td>{{{{ {resource}.attributes.{field} | date:'long' }}}</td>"""
