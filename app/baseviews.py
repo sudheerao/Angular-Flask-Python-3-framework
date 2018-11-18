@@ -27,7 +27,7 @@ def create_token(user):
     payload = {
         'sub': user.id,
         'iat': datetime.utcnow(),
-        'exp': datetime.utcnow() + timedelta(days=1),
+        'exp': datetime.utcnow() + timedelta(days=30),
     }
     token = jwt.encode(payload, SECRET_KEY)
     return token.decode('unicode_escape')
@@ -135,8 +135,10 @@ class SignUp(Resource):
         try:
             schema.validate(raw_dict)
             request_dict = raw_dict['data']['attributes']
-            createdby = request_dict['name']
-            updatedby = request_dict['name']
+            payload = parse_token(request)
+            logged_user = Users.query.get(payload['sub'])
+            createdby = logged_user.name
+            updatedby = logged_user.name
             password = generate_password_hash (request_dict['password'] )
 
            
@@ -186,7 +188,7 @@ class ForgotPassword(Resource):
             payload = parse_token(request)
             user_id = payload['sub']
             user = Users.query.get_or_404(user_id)
-            print(request.data)
+            
             raw_dict = request.get_json(force=True)
             request_dict = raw_dict['data']['attributes']
 

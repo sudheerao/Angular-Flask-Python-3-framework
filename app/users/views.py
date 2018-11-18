@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, make_response
 from app.users.models import Users, UsersSchema
 from flask_restful import Api
-from app.baseviews import Resource
+from app.baseviews import Resource, parse_token
 from app.basemodels import db
 from sqlalchemy.exc import SQLAlchemyError
 from marshmallow import ValidationError
@@ -79,6 +79,10 @@ class GetUpdateDeleteUser(Resource):
         try:
             schema.validate(raw_dict)
             request_dict = raw_dict['data']['attributes']
+            payload = parse_token(request)
+            logged_user = Users.query.get(payload['sub'])
+            request_dict['updatedby'] = logged_user.name
+
             for key, value in request_dict.items():
                 if key == "password":
                     value = generate_password_hash(value)
