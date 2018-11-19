@@ -37,7 +37,7 @@ menu_string ="""
 #String to add to __init__.py for routes
 app_route = """
     #app-route  
-    @app.route('/{resources')
+    @app.route('/{resources}')
            """
 
 

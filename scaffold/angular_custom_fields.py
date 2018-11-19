@@ -58,4 +58,4 @@ table_row_field = """
 
                                                   
 table_date_row_field = """
-                         <td>{{{{ {resource}.attributes.{field} | date:'long' }}}</td>"""
+                         <td>{{{{ {resource}.attributes.{field} | date:'long' }}}}</td>"""

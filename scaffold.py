@@ -243,7 +243,7 @@ with open(yaml_file, "r") as file:
                 replace_string(
                     resource, resources, sidebar_file, "<!-- menu -->", menu_string)
                 # Add routes __init__.py
-                replace_string(resource,resources,blueprint_file, "#app_route", app_route)    
+                replace_string(resource,resources,blueprint_file, "#app-route", app_route)    
               
                 run_ngbuild()
                 #run_autopep8()
