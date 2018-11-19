@@ -10,8 +10,8 @@ class Users(db.Model, CRUD_MixIn):
 
     email = db.Column(db.String(250), nullable=False,unique=True)
     password = db.Column(db.String(250), nullable=False)
-    name = db.Column(db.String(250), nullable=False)
-    createddate = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    name = db.Column(db.String(250), nullable=True, unique=True)
+    createddate = db.Column(db.DateTime, nullable=True, default=datetime.utcnow)
     createdby = db.Column(db.String(250), nullable=False)
     updateddate = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updatedby = db.Column(db.String(250), nullable=False)

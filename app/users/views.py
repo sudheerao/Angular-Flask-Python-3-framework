@@ -28,7 +28,7 @@ class CreateListUsers(Resource):
         results = schema.dump(users_query, many=True).data
         return results
     #check baseviews signup
-    """http://jsonapi.org/format/#crud
+    http://jsonapi.org/format/#crud
     A resource can be created by sending a POST request to a URL that represents a collection of users. The request MUST include a single resource object as primary data. The resource object MUST contain at least a type member.
     If a POST request did not include a Client-Generated ID and the requested resource has been created successfully, the server MUST return a 201 Created status code
     
@@ -37,9 +37,21 @@ class CreateListUsers(Resource):
         try:
             schema.validate(raw_dict)
             request_dict = raw_dict['data']['attributes']
-            user = Users(request_dict['email'], request_dict['password'], request_dict['name'],
-                          request_dict['createdby'],
-                           request_dict['updatedby'])
+            payload = parse_token(request)
+            logged_user = Users.query.get(payload['sub'])
+            createdby = logged_user.name
+            updatedby = logged_user.name
+            password = generate_password_hash (request_dict['password'] )
+
+           
+            user = Users(
+                         request_dict['email'],
+                         password,
+                         request_dict['name'],
+                         createdby,
+                         updatedby ,
+
+                         )
             user.add(user)
             # Should not return password hash
             query = Users.query.get(user.id)
@@ -56,7 +68,7 @@ class CreateListUsers(Resource):
             resp = jsonify({"error": str(e)})
             resp.status_code = 403
             return resp
-    """      
+     
 
 
 class GetUpdateDeleteUser(Resource):
@@ -92,14 +104,14 @@ class GetUpdateDeleteUser(Resource):
             return self.get(id)
 
         except ValidationError as err:
-            resp = jsonify({"message": err.messages})
+            resp = jsonify({"error": err.messages})
             resp.status_code = 401
             return resp
 
         except SQLAlchemyError as e:
             db.session.rollback()
 
-            resp = jsonify({"message": str(e.orig.args)})
+            resp = jsonify({"error": str(e.orig.args)})
             resp.status_code = 401
             return resp
 
@@ -116,7 +128,7 @@ class GetUpdateDeleteUser(Resource):
 
         except SQLAlchemyError as e:
             db.session.rollback()
-            resp = jsonify({"message": str(e.orig.args)})
+            resp = jsonify({"error": str(e.orig.args)})
             resp.status_code = 401
             return resp
 

@@ -31,7 +31,7 @@ export class {Resources}Service {{
         // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
       return throwError(
-        ` code ${{error.status}}, ` +   ` ${{error.error.message}}`);
+        ` code ${{error.status}}, ` +   ` ${{error.error.error}}`);
        
       }}
    

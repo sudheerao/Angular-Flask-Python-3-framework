@@ -111,7 +111,7 @@ class Auth(Resource):
         user = Users.query.filter_by(email=email).first()
         if user == None:
             response = make_response(
-                jsonify({"message": "invalid username/password"}))
+                jsonify({"error": "invalid username/password"}))
             response.status_code = 401
             return response
         if check_password_hash(user.password, password):
@@ -120,7 +120,7 @@ class Auth(Resource):
             return {'token': token}
         else:
             response = make_response(
-                jsonify({"message": "invalid username/password"}))
+                jsonify({"error": "invalid username/password"}))
             response.status_code = 401
             return response
 
@@ -158,14 +158,14 @@ class SignUp(Resource):
 
         except ValidationError as err:
             print(err.messages)
-            resp = jsonify({"message": err.messages})
+            resp = jsonify({"error": err.messages})
             resp.status_code = 403
             return resp
 
         except SQLAlchemyError as e:
            
             db.session.rollback()
-            resp = jsonify({"message": str(e.orig.args)})
+            resp = jsonify({"error": str(e.orig.args)})
             print(str(e))
 
             resp.status_code = 403
@@ -221,7 +221,7 @@ class ForgotPassword(Resource):
                           recipients=[email])
             msg.html = PASSWORD_RESET_EMAIL.format(token=token)
             mail.send(msg)
-            return {"message": "Password reset mail sent successfully"}, 201
+            return {"error": "Password reset mail sent successfully"}, 201
         else:
             return {"error": "We could not find this email address :("}, 404
 

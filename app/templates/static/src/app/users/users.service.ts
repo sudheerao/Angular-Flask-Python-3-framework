@@ -32,7 +32,7 @@ export class UsersService {
         // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
       return throwError(
-        ` code ${error.status}, ` +   ` ${error.error.message}`);
+        ` code ${error.status}, ` +   ` ${error.error.error}`);
        
       }
    
@@ -57,7 +57,7 @@ export class UsersService {
   add(user: any): Observable<any> {
 
     
-    return this.http.post<User>(`/api/v1/signup.json`, user, this.httpOptions)
+    return this.http.post<User>(`/api/v1/users.json`, user, this.httpOptions)
       .pipe(
         catchError(this.handleError)          
         
@@ -67,6 +67,19 @@ export class UsersService {
   
 }
 
+
+signUp(user: any): Observable<any> {
+
+    
+  return this.http.post<User>(`/api/v1/signup.json`, user, this.httpOptions)
+    .pipe(
+      catchError(this.handleError)          
+      
+      )
+  
+
+
+}
 login(user: any): Observable<any> {
 
     
