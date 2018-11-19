@@ -186,7 +186,7 @@ with open(yaml_file, "r") as file:
             #Will be auto populated at the db level
             elif field_type == "datetime":
                 db_rows += """
-    {} = db.Column(db.TIMESTAMP,server_default=db.func.current_timestamp(),nullable=False)""".format(field)
+    {} = db.Column(db.TIMESTAMP,nullable=False, default=datetime.utcnow)""".format(field)
                 schema += """
     {} = fields.DateTime()""".format(field)
                 continue
