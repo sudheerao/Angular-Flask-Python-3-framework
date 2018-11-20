@@ -79,7 +79,7 @@ def create_angular_files(object_name:str , attributes:Dict[str,str]):
                 elif field_type == "email":
                     angular_form_fields += user_add_edit_string.format(field=field,type="email")
                 elif field_type == "boolean":
-                    angular_form_fields += user_add_edit_string.format(field=field,type="radio")
+                    angular_form_fields += boolean_form_string.format(field=field,Field=Field)
                 elif field_type == "url":
                     angular_form_fields += user_add_edit_string.format(field=field,type="radio")
                 elif field_type == "decimal":

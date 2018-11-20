@@ -14,7 +14,16 @@ user_add_edit_string = """ <div class="form-group">
                                             
                                             </div>
                             </div> """
-
+boolean_form_string = """
+        <fieldset class="form-group">
+               <label>{Field}</label>
+              
+          <label class="radio-inline"> 
+                <input type="radio"  id="{field}" value="true" formControlName = "{field}" checked> yes</label>
+                <label class="radio-inline">
+               <input type="radio"  id="{field}" value="true" formControlName = "{field}" checked> no</label>               
+           </fieldset>
+"""
 #Add to module-add.component.ts
 
 #Common for edit and add

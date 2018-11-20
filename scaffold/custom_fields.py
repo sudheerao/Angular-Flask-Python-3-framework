@@ -133,16 +133,14 @@ text_form_string  = """
                  ng-model="{resource}.data.attributes.{field}" placeholder="{field}*" rows="5" required></textarea>
             </div>
           </div>"""
+          
 boolean_form_string = """
-        <div class="form-group">
-               <label for="is_active" class="col-sm-2 control-label">{Field}</label>
-               <div class="col-sm-4">
+        <fieldset class="form-group">
+               <label>{Field}</label>
+              
+          <label class="radio-inline"> 
+                <input type="radio"  id="{field}" value="true" formControlName = "{field}" checked> yes</label>
                 <label class="radio-inline">
-                <input type="radio" name="{field}" id="{field}" ng-value="1" ng-model="{resource}.data.attributes.{field}">
-                True</label>
-                <label class="radio-inline">
-                <input type="radio" name="{field}" id="{field}" ng-value="0" ng-model="{resource}.data.attributes.{field}">
-                False</label>
-            </div>
-        </div>
+               <input type="radio"  id="{field}" value="true" formControlName = "{field}" checked> no</label>               
+           </fieldset>
 """
