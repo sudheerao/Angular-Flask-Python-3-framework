@@ -34,13 +34,12 @@ class CreateList{Resources}(Resource):
                 request_dict = raw_dict['data']['attributes']
                 {resource} = {Resources}({add_fields})
                 {resource}.add({resource}) 
-                #Should not return password hash
                 query = {Resources}.query.get({resource}.id)
                 results = schema.dump(query).data                
                 return results, 201
             
         except ValidationError as err:
-                resp = jsonify({{"error": err.messages}})
+                resp = jsonify({{"error": str(err.messages)}})
                 resp.status_code = 403
                 return resp               
                 
@@ -79,7 +78,7 @@ class GetUpdateDelete{Resource}(Resource):
             return self.get(id)
             
         except ValidationError as err:
-                resp = jsonify({{"error": err.messages}})
+                resp = jsonify({{"error": str(err.messages)}})
                 resp.status_code = 401
                 return resp               
                 
