@@ -36,7 +36,7 @@ def create_angular_files(object_name:str , attributes:Dict[str,str]):
     resource,resources = make_plural(object_name)
     Resource = resource.title()
     #Create Angular folders and files
-    object_dir = os.path.join('app/templates/static/src/app/', object_name)
+    object_dir = os.path.join('app/templates/static/src/app/', resources)
     object_add_dir = os.path.join(object_dir, "add")
     object_edit_dir = os.path.join(object_dir, "edit")
 

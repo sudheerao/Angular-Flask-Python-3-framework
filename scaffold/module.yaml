@@ -1,4 +1,4 @@
- customers:
+ custom:
   - name:string
   - city:string
   - devices:string
