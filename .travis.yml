@@ -1,6 +1,8 @@
 dist: osx
 
 language: python
+node_js:
+  - "7"
 python:
    - "3.6"
    

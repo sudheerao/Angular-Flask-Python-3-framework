@@ -1,4 +1,4 @@
-Flask-Scaffold let's you Prototype Database Driven Web Apps and REST API's with Angular 6, Bootstrap 4 and Flask python framework, 
+Flask-Scaffold let's you Prototype Database Driven Web Apps (Angular 6, Bootstrap 4) and REST API's  (Flask python framework), 
 
 
 ![](http://i.imgur.com/axck2Ec.png)
@@ -42,7 +42,7 @@ For a list of supported fields please see https://github.com/Leo-g/Flask-Scaffol
      - title:string
      - body:text
      - author:string
-     - creation_date:date
+     - creation_date:datetime
      - published:boolean
     comments:
      - author:string
