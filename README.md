@@ -1,5 +1,5 @@
-Flask-Scaffold let's you Prototype Database Driven Admin Dashboards with Bootstrap 3, Python and a MySQL/Mariadb or PostgreSQL
-Database. It will also scaffold a RESTFUL API which can be used with any REST Frontend Framework.
+Flask-Scaffold let's you Prototype Database Driven Web Apps and REST API's with Angular 6, Bootstrap 4 and Flask python framework, 
+
 
 ![](http://i.imgur.com/axck2Ec.png)
 
@@ -7,12 +7,9 @@ Features include
 
  - Python 3 Support
  - RESTFUL JSON API
- - Unit Testing with python Unit tests
- - End 2 End testing with Protractor
  - Continous Integration with Travis-CI
  - Inbuilt User Management and Admin Dashboard
  - [Google Analytics](#google-analytics)
- - Bootstrap 3 Support
  - Datatables support
 
 ###[Demo](http://flask-scaffold.herokuapp.com/) Sign Up and Login
@@ -73,22 +70,6 @@ For a list of supported fields please see https://github.com/Leo-g/Flask-Scaffol
 
 ![](http://i.imgur.com/ePILhzh.png)
 
-###Examples
-[Freddy a Blogging Engine](https://github.com/Leo-G/Freddy)
-
-[Running Asynchronous commands on Linux with Flask and Celery](https://github.com/Leo-G/Flask-Celery-Linux)
-
-###Tests
-
-####For E2E testing with protractor
-Installation instructions for protractor are in the [wiki](https://github.com/Leo-G/Flask-Scaffold/wiki/Headless-Testing-Angularjs-apps-with-Protractor-and-Selenium-on-Ubuntu-14.04)
-
-    # To run tests for all modules
-    protractor conf.js
-
-    # To run a a test for a specific module
-
-    protractor app/templates/<module_name>/conf.js
 
 ####For unit testing with python Unit tests
 
@@ -146,9 +127,6 @@ https://techarena51.com/blog/tag/flask-tutorials/?utm_source=gh-flask-scaffold-r
                     |-- test_module-2.py  # Unit Tests for module 2
                     |-- views.py
                 |__ templates
-                   |-- index.html
-                   |-- login.html
-                   |-- home.html
                    +-- static
                           + -- js
                                  |-- app.js
