@@ -21,6 +21,7 @@ env:
   RDS_test_HOSTNAME="localhost"
 
 before_script:
+  - cd app/templates/static/ && npm install
   - psql -c 'create database fscafold;' -U postgres
   - python scaffold.py scaffold/blog.yaml
   - python db.py db init
