@@ -117,9 +117,6 @@ def run_ngbuild():
     try:
         os.chdir("app/templates/static/")
         cmd_output = subprocess.check_output(
-            ['npm', 'install'])    
-        print("Ran npm install")
-        cmd_output = subprocess.check_output(
             ['ng', 'build', '--prod'])    
         print("Ran Ng Build --prod")
     except subprocess.CalledProcessError:
