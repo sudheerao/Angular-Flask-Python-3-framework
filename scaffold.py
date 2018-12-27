@@ -245,7 +245,7 @@ with open(yaml_file, "r") as file:
                 # Add routes __init__.py
                 replace_string(resource,resources,blueprint_file, "#app-route", app_route)    
               
-                run_ngbuild()
+                
                 #run_autopep8()
             except:
                 clean_up(module_dir)
@@ -253,3 +253,4 @@ with open(yaml_file, "r") as file:
 
         except:
             raise
+run_ngbuild()
