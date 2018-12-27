@@ -1,7 +1,10 @@
-Flask-Scaffold let's you Prototype Database Driven Web Apps (Angular 6, Bootstrap 4) and REST API's  (Flask python framework), 
+Flask-Scaffold 2.0 let's you Prototype Database Driven Web Apps (Angular 6, Bootstrap 4) and REST API's  (Flask python framework), 
 
 
-![](http://i.imgur.com/axck2Ec.png)
+
+![](https://i.imgur.com/GeZ9vAB.png)
+![](https://i.imgur.com/XHpxJrM.png)
+![](https://i.imgur.com/RpsXaoe.png)
 
 Features include
 
@@ -12,8 +15,7 @@ Features include
  - [Google Analytics](#google-analytics)
  - Datatables support
 
-###[Demo](http://flask-scaffold.herokuapp.com/) Sign Up and Login
-
+###[Demo](http://flaskscaffold.cloudapp.net) Sign Up and Login
 
 
 ###Installation
@@ -28,9 +30,12 @@ along with NPM.
 ####Step 2: Install the requirements and add your Database configuration details.
 
     pip install -r requirements.txt
+    cd app/templates/static
+    npm install
 
     vim config.py
     #Fill in your database username, password, name, host etc
+
 
 #### Step 3 : Declare your Resource and it's fields in a YAML file as follows
 
@@ -67,7 +72,6 @@ For a list of supported fields please see https://github.com/Leo-g/Flask-Scaffol
 
 **You should be able to see the Login Page at http://localhost:5000, Sign Up and Login
 
-![](http://i.imgur.com/ePILhzh.png)
 
 
 ####For unit testing with python Unit tests
@@ -161,8 +165,7 @@ Add your tracking ID and Domain name in app.js in the app.config  section
 
        });
 
-# Angularjs
-
-The frontend currently uses Angularjs 1.5 and ui-router for routes.
 
 For complete Documentation see the [wiki](https://github.com/Leo-G/Flask-Scaffold/wiki/Add-Google-Analytics-to-Angularjs-UI-Routes)
+
+Note: This app in based on https://github.com/start-angular/SB-Admin-BS4-Angular-6
