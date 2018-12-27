@@ -71,7 +71,7 @@ export class UsersService {
 signUp(user: any): Observable<any> {
 
     
-  return this.http.post<User>(`/api/v1/signup.json`, user, this.httpOptions)
+  return this.http.post<User>(`/api/v1/signup.json`, user)
     .pipe(
       catchError(this.handleError)          
       

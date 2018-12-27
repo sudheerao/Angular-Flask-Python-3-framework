@@ -135,10 +135,9 @@ class SignUp(Resource):
         try:
             schema.validate(raw_dict)
             request_dict = raw_dict['data']['attributes']
-            payload = parse_token(request)
-            logged_user = Users.query.get(payload['sub'])
-            createdby = logged_user.name
-            updatedby = logged_user.name
+            createdby = "Self Signup"
+            updatedby = "Self Signup"
+            
             password = generate_password_hash (request_dict['password'] )
 
            
