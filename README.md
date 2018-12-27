@@ -1,29 +1,27 @@
-Flask-Scaffold let's you Prototype Database Driven Admin Dashboards with Bootstrap 3, Python and a MySQL/Mariadb or PostgreSQL
-Database. It will also scaffold a RESTFUL API which can be used with any REST Frontend Framework.
+Flask-Scaffold 2.0 let's you Prototype Database Driven Web Apps (Angular 6, Bootstrap 4) and REST API's  (Flask python framework), 
 
-![](http://i.imgur.com/axck2Ec.png)
+
+
+![](https://i.imgur.com/GeZ9vAB.png)
+![](https://i.imgur.com/XHpxJrM.png)
+![](https://i.imgur.com/RpsXaoe.png)
 
 Features include
 
  - Python 3 Support
  - RESTFUL JSON API
- - Unit Testing with python Unit tests
- - End 2 End testing with Protractor
  - Continous Integration with Travis-CI
  - Inbuilt User Management and Admin Dashboard
  - [Google Analytics](#google-analytics)
- - Bootstrap 3 Support
  - Datatables support
 
-###[Demo](http://flask-scaffold.herokuapp.com/) Sign Up and Login
+###[Demo](http://flaskscaffold.cloudapp.net) Sign Up and Login
 
-![](https://travis-ci.org/Leo-G/Flask-Scaffold.svg?branch=master)
-[![Gitter](https://badges.gitter.im/Leo-G/Flask-Scaffold.svg)](https://gitter.im/Leo-G/Flask-Scaffold?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![PayPal donate button](http://img.shields.io/paypal/donate.png?color=yellow)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=althealobo%40gmail%2ecom&lc=AU&item_name=Leo%2dG&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest)
 
 ###Installation
 
-Please ensure that development libraries for [PostgreSQL](http://techarena51.com/index.php/flask-sqlalchemy-postgresql-tutorial/) are installed.
+Please ensure that development libraries for [PostgreSQL](http://techarena51.com/index.php/flask-sqlalchemy-postgresql-tutorial/) are installed
+along with NPM.
 
 ####Step 1:Clone the project to your application folder.
 
@@ -32,9 +30,12 @@ Please ensure that development libraries for [PostgreSQL](http://techarena51.com
 ####Step 2: Install the requirements and add your Database configuration details.
 
     pip install -r requirements.txt
+    cd app/templates/static
+    npm install
 
     vim config.py
     #Fill in your database username, password, name, host etc
+
 
 #### Step 3 : Declare your Resource and it's fields in a YAML file as follows
 
@@ -45,7 +46,7 @@ For a list of supported fields please see https://github.com/Leo-g/Flask-Scaffol
      - title:string
      - body:text
      - author:string
-     - creation_date:date
+     - creation_date:datetime
      - published:boolean
     comments:
      - author:string
@@ -71,24 +72,7 @@ For a list of supported fields please see https://github.com/Leo-g/Flask-Scaffol
 
 **You should be able to see the Login Page at http://localhost:5000, Sign Up and Login
 
-![](http://i.imgur.com/ePILhzh.png)
 
-###Examples
-[Freddy a Blogging Engine](https://github.com/Leo-G/Freddy)
-
-[Running Asynchronous commands on Linux with Flask and Celery](https://github.com/Leo-G/Flask-Celery-Linux)
-
-###Tests
-
-####For E2E testing with protractor
-Installation instructions for protractor are in the [wiki](https://github.com/Leo-G/Flask-Scaffold/wiki/Headless-Testing-Angularjs-apps-with-Protractor-and-Selenium-on-Ubuntu-14.04)
-
-    # To run tests for all modules
-    protractor conf.js
-
-    # To run a a test for a specific module
-
-    protractor app/templates/<module_name>/conf.js
 
 ####For unit testing with python Unit tests
 
@@ -146,9 +130,6 @@ https://techarena51.com/blog/tag/flask-tutorials/?utm_source=gh-flask-scaffold-r
                     |-- test_module-2.py  # Unit Tests for module 2
                     |-- views.py
                 |__ templates
-                   |-- index.html
-                   |-- login.html
-                   |-- home.html
                    +-- static
                           + -- js
                                  |-- app.js
@@ -184,8 +165,7 @@ Add your tracking ID and Domain name in app.js in the app.config  section
 
        });
 
-# Angularjs
-
-The frontend currently uses Angularjs 1.5 and ui-router for routes.
 
 For complete Documentation see the [wiki](https://github.com/Leo-G/Flask-Scaffold/wiki/Add-Google-Analytics-to-Angularjs-UI-Routes)
+
+Note: This app in based on https://github.com/start-angular/SB-Admin-BS4-Angular-6

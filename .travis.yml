@@ -1,43 +1,33 @@
-sudo: required
-dist: trusty
+dist: osx
 
 language: python
+node_js:
+  - "7"
 python:
-   - "3.4"
-   - "3.5"
-
+   - "3.6"
+   
 # command to run tests
 script:
- - protractor conf.js
-
-# - bash tests.bash
+ - python tests/tests.py
 
 addons:
-  postgresql: "9.3"
-  mariadb: '10.0'
+  postgresql: "9.6"
+  chrome: stable
+
+env:
+  RDS_test_USERNAME=postgres
+  RDS_test_PASSWORD=""
+  RDS_test_DB_NAME=fscafold
+  RDS_test_HOSTNAME="localhost"
 
 before_script:
   - psql -c 'create database fscafold;' -U postgres
-  - python scaffold.py scaffold/module.yaml
+  - npm install --prefix ./app/templates/static/
+  - python scaffold.py scaffold/blog.yaml
   - python db.py db init
   - python db.py db migrate
   - python db.py db upgrade
-  - sudo apt-get update -q
-  - curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-  - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-  - sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-  - sudo apt-get update
-  - sudo apt-get install -y nodejs postfix google-chrome-stable
-  - nodejs -v
-  - sudo npm install -g protractor
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  - sleep 3 # give xvfb some time to start
-  #For testing purposes only
-  #- sudo apt-get install curl
-  #- curl localhost:80
-  - sudo webdriver-manager update
-  - sudo webdriver-manager start --standalone &
-  - sleep 4
   - python run.py &
+  - sleep 3
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
   - sleep 3

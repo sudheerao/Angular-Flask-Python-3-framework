@@ -1,21 +1,9 @@
-posts:
- - title:string
- - body:text
- - published:boolean
- - age:integer
- - email:email
- - url:url
- - timestamp:datetime
- - date:date
- - pricing:decimal
-
-comments:
- - author:string
- - body:text
- - author_url:url
- - created_on:date
- - approved:boolean
-authors:
- - name:string
- - profile:text
- - url:url
+ custom:
+  - name:string
+  - city:string
+  - devices:string
+  - created:datetime
+  - createdBy:string
+  - updated:datetime
+  - updatedBy:string
+ 

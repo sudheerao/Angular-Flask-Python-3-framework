@@ -1,6 +1,9 @@
+#Ignore all hidden files
+.*
+
 #Flask
-config.py
-migrations/
+#config.py
+migrations
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -72,3 +75,11 @@ target/
 pyvenv.cfg
 .venv
 pip-selfcheck.json
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+#node modules
+/**/**/**/node_modules/*

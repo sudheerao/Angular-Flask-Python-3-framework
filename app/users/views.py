@@ -1,11 +1,11 @@
 from flask import Blueprint, request, jsonify, make_response
 from app.users.models import Users, UsersSchema
 from flask_restful import Api
-from app.baseviews import Resource
+from app.baseviews import Resource, parse_token
 from app.basemodels import db
 from sqlalchemy.exc import SQLAlchemyError
 from marshmallow import ValidationError
-from werkzeug.security import generate_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 
 
 users = Blueprint('users', __name__)
@@ -27,18 +27,31 @@ class CreateListUsers(Resource):
         users_query = Users.query.all()
         results = schema.dump(users_query, many=True).data
         return results
-
-    """http://jsonapi.org/format/#crud
-    A resource can be created by sending a POST request to a URL that represents a collection of users. The request MUST include a single resource object as primary data. The resource object MUST contain at least a type member.
-    If a POST request did not include a Client-Generated ID and the requested resource has been created successfully, the server MUST return a 201 Created status code"""
-
+    
+    """A resource can be created by sending a POST request to a URL that represents a collection of users. The request MUST include a single resource object as primary data. The resource object MUST contain at least a type member.
+    If a POST request did not include a Client-Generated ID and the requested resource has been created successfully, 
+    the server MUST return a 201 Created status code"""
+    
     def post(self):
         raw_dict = request.get_json(force=True)
         try:
             schema.validate(raw_dict)
             request_dict = raw_dict['data']['attributes']
-            user = Users(request_dict['email'], generate_password_hash(request_dict['password']), request_dict[
-                         'name'], request_dict['active'], request_dict['role'],)
+            payload = parse_token(request)
+            logged_user = Users.query.get(payload['sub'])
+            createdby = logged_user.name
+            updatedby = logged_user.name
+            password = generate_password_hash (request_dict['password'] )
+
+           
+            user = Users(
+                         request_dict['email'],
+                         password,
+                         request_dict['name'],
+                         createdby,
+                         updatedby ,
+
+                         )
             user.add(user)
             # Should not return password hash
             query = Users.query.get(user.id)
@@ -55,6 +68,7 @@ class CreateListUsers(Resource):
             resp = jsonify({"error": str(e)})
             resp.status_code = 403
             return resp
+     
 
 
 class GetUpdateDeleteUser(Resource):
@@ -77,8 +91,15 @@ class GetUpdateDeleteUser(Resource):
         try:
             schema.validate(raw_dict)
             request_dict = raw_dict['data']['attributes']
+            payload = parse_token(request)
+            logged_user = Users.query.get(payload['sub'])
+            request_dict['updatedby'] = logged_user.name
+
             for key, value in request_dict.items():
-                setattr(user, key, value)           
+                if key == "password":
+                    value = generate_password_hash(value)
+                setattr(user, key, value)
+
             user.update()
             return self.get(id)
 
@@ -89,7 +110,8 @@ class GetUpdateDeleteUser(Resource):
 
         except SQLAlchemyError as e:
             db.session.rollback()
-            resp = jsonify({"error": str(e)})
+
+            resp = jsonify({"error": str(e.orig.args)})
             resp.status_code = 401
             return resp
 
@@ -106,7 +128,7 @@ class GetUpdateDeleteUser(Resource):
 
         except SQLAlchemyError as e:
             db.session.rollback()
-            resp = jsonify({"error": str(e)})
+            resp = jsonify({"error": str(e.orig.args)})
             resp.status_code = 401
             return resp
 

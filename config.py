@@ -1,8 +1,10 @@
+import os
+
 # DATABASE SETTINGS
-pg_db_username = 'postgres'
-pg_db_password = ''
-pg_db_name = 'fscafold'
-pg_db_hostname = 'localhost'
+pg_db_username = os.environ['RDS_test_USERNAME']
+pg_db_password = os.environ['RDS_test_PASSWORD']
+pg_db_name = os.environ['RDS_test_DB_NAME']
+pg_db_hostname = os.environ['RDS_test_HOSTNAME']
 
 # MYSQL
 mysql_db_username = 'root'
@@ -36,3 +38,4 @@ PASSWORD_RESET_EMAIL ="""
       Please click on the link below to reset your password
 
       <a href="/forgotpassword/{token}> Click here </a>"""
+
