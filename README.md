@@ -20,7 +20,7 @@ Features include
 
 ###Installation
 
-Please ensure that development libraries for [PostgreSQL](http://techarena51.com/index.php/flask-sqlalchemy-postgresql-tutorial/) are installed
+Please ensure that development libraries for [PostgreSQL](http://techarena51.com/blog/flask-sqlalchemy-postgresql-tutorial/) are installed
 along with NPM.
 
 ####Step 1:Clone the project to your application folder.
