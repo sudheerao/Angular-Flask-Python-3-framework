@@ -14,13 +14,12 @@ Features include
 
 ###[Demo](http://flask-scaffold.herokuapp.com/) Sign Up and Login
 
-![](https://travis-ci.org/Leo-G/Flask-Scaffold.svg?branch=master)
-[![Gitter](https://badges.gitter.im/Leo-G/Flask-Scaffold.svg)](https://gitter.im/Leo-G/Flask-Scaffold?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![PayPal donate button](http://img.shields.io/paypal/donate.png?color=yellow)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=althealobo%40gmail%2ecom&lc=AU&item_name=Leo%2dG&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest)
+
 
 ###Installation
 
-Please ensure that development libraries for [PostgreSQL](http://techarena51.com/index.php/flask-sqlalchemy-postgresql-tutorial/) are installed.
+Please ensure that development libraries for [PostgreSQL](http://techarena51.com/index.php/flask-sqlalchemy-postgresql-tutorial/) are installed
+along with NPM.
 
 ####Step 1:Clone the project to your application folder.
 
