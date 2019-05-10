@@ -25,7 +25,7 @@ along with NPM.
 
 ####Step 1:Clone the project to your application folder.
 
-    git clone git@github.com:Leo-g/Flask-Scaffold.git YourAppFolderName && cd YourAppFolderName
+    git clone git@github.com/Excellent1212/Angular-Flask-Python-3-framework.git YourAppFolderName && cd YourAppFolderName
 
 ####Step 2: Install the requirements and add your Database configuration details.
 
@@ -39,7 +39,7 @@ along with NPM.
 
 #### Step 3 : Declare your Resource and it's fields in a YAML file as follows
 
-For a list of supported fields please see https://github.com/Leo-g/Flask-Scaffold/wiki/Fields
+For a list of supported fields please see https://github.com/Excellent1212/Angular-Flask-Python-3-framework/wiki/Fields
 
     vim scaffold/blog.yaml
     posts:
